@@ -1,0 +1,108 @@
+/* Сброс стандартных отступов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основные стили для всего документа */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #0a0a2a;
+    color: white;
+}
+
+/* Контейнер для центрирования содержимого */
+.container {
+    max-width: 1200px;
+    margin: 0;
+    padding: 0 20px;
+}
+
+
+/* Стили для шапки */
+.header {
+    background-color: rgba(10, 10, 42, 0.9);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #1a1a5a;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+}
+
+/* Стили для логотипа */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Стили для навигации */
+.nav {
+    display: flex;
+    gap: 2rem; /* Расстояние между ссылками */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ccc;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Эффект для активной ссылки */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Стили для основного содержимого */
+.main {
+    margin-top: 80px; /* Отступ чтобы контент не заезжал под фиксированную шапку */
+    padding: 2rem 0;
+    min-height: calc(100vh - 80px);
+}
+
+.main h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.main p {
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0.8;
+}
