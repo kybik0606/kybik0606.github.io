@@ -84,15 +84,23 @@ body {
     .header .container {
         flex-direction: column;
         padding: 1rem 10px;
+        text-align: center;
     }
     
     .logo {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
+        order: 1; /* Логотип первый */
+    }
+    
+    .social-icons {
+        order: 2; /* Иконки вторые */
+        margin-top: 0.5rem;
+        justify-content: center;
     }
     
     .main {
-        margin-top: 120px; /* Больше отступ для мобильных */
+        margin-top: 140px; /* Увеличиваем отступ для мобильных */
         padding: 1rem 0;
     }
     
@@ -111,7 +119,75 @@ body {
         padding: 0.5rem 10px;
     }
     
+    .logo {
+        font-size: 1.3rem;
+    }
+    
     .main {
-        margin-top: 100px;
+        margin-top: 120px;
+    }
+}
+
+/* Стили для иконок соцсетей */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-link:hover {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.social-link i {
+    font-size: 1.2rem;
+}
+
+/* Адаптивность для иконок на мобильных */
+@media (max-width: 768px) {
+    .social-icons {
+        gap: 0.7rem;
+        margin-top: 0.5rem;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .social-link i {
+        font-size: 1rem;
+    }
+    
+    /* На очень маленьких экранах делаем иконки меньше */
+    @media (max-width: 480px) {
+        .social-icons {
+            gap: 0.5rem;
+        }
+        
+        .social-link {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .social-link i {
+            font-size: 0.9rem;
+        }
     }
 }
