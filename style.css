@@ -191,3 +191,226 @@ body {
         }
     }
 }
+
+/* Стили для галереи */
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.intro h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.intro p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gallery h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #667eea;
+}
+
+/* Сетка галереи */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+/* Карточка фотографии */
+.photo-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.photo-container {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-card:hover .photo {
+    transform: scale(1.05);
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-card:hover .photo-overlay {
+    opacity: 1;
+}
+
+.view-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.view-btn:hover {
+    transform: scale(1.1);
+}
+
+.photo-info {
+    padding: 1.5rem;
+}
+
+.photo-info h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+}
+
+.photo-info p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    line-height: 1.4;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#modalImage {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.modal-info {
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+}
+
+.modal-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+}
+
+/* Адаптивность галереи */
+@media (max-width: 768px) {
+    .intro h2 {
+        font-size: 2rem;
+    }
+    
+    .intro p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .photo-container {
+        height: 200px;
+    }
+    
+    .photo-info {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        gap: 1rem;
+    }
+    
+    .photo-container {
+        height: 180px;
+    }
+}
