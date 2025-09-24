@@ -244,9 +244,9 @@ body {
 }
 
 .photo-container {
-    position: relative;
-    overflow: hidden;
-    max-height: 400px;
+    height: 300px;
+    width: 300px; 
+    margin: 0 auto;   
 }
 
 .photo {
