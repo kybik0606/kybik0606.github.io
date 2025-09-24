@@ -224,7 +224,7 @@ body {
 /* Сетка галереи */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 2rem;
     padding: 1rem 0;
 }
@@ -246,7 +246,7 @@ body {
 .photo-container {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    max-height: 400px;
 }
 
 .photo {
