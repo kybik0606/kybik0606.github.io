@@ -9,9 +9,8 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #d4d4d4;
-    background-color: #0a0a2a;
-    color: white;
+    background-color: #000000; /* Чёрный фон */
+    color: #ffffff; /* Белый текст */
 }
 
 /* Контейнер для центрирования содержимого */
@@ -19,7 +18,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    width: 100%; /* Добавляем это */
+    width: 100%;
 }
 
 /* Стили для основного содержимого */
@@ -27,7 +26,7 @@ body {
     margin-top: 80px;
     padding: 2rem 0;
     min-height: calc(100vh - 80px);
-    width: 100%; /* Добавляем это */
+    width: 100%;
 }
 
 .main .container {
@@ -38,27 +37,28 @@ body {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     text-align: center;
-    width: 100%; /* Чтобы заголовок занимал всю ширину */
+    width: 100%;
+    color: #ffffff; /* Белый текст */
 }
 
 .main p {
     font-size: 1.2rem;
     text-align: center;
-    opacity: 0.8;
-    width: 100%; /* Чтобы текст занимал всю ширину */
-    max-width: none; /* Убираем ограничение ширины */
+    opacity: 0.9;
+    width: 100%;
+    max-width: none;
+    color: #ffffff; /* Белый текст */
 }
-
 
 /* Стили для шапки */
 .header {
-    background-color: rgba(10, 10, 42, 0.9);
+    background-color: rgba(0, 0, 0, 0.9); /* Чёрный с прозрачностью */
     backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    border-bottom: 1px solid #1a1a5a;
+    border-bottom: 1px solid #333333; /* Тёмно-серый вместо синего */
 }
 
 .header .container {
@@ -72,12 +72,11 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    background: linear-gradient(45deg, #000000, #262527);
+    background: linear-gradient(45deg, #ffffff, #cccccc); /* Бело-серый градиент */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
 
 /* Мобильная навигация */
 @media (max-width: 768px) {
@@ -90,17 +89,17 @@ body {
     .logo {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
-        order: 1; /* Логотип первый */
+        order: 1;
     }
     
     .social-icons {
-        order: 2; /* Иконки вторые */
+        order: 2;
         margin-top: 0.5rem;
         justify-content: center;
     }
     
     .main {
-        margin-top: 140px; /* Увеличиваем отступ для мобильных */
+        margin-top: 140px;
         padding: 1rem 0;
     }
     
@@ -146,13 +145,14 @@ body {
     color: white;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .social-link:hover {
-    background: linear-gradient(45deg, #000000, #262527);
+    background: linear-gradient(45deg, #ffffff, #cccccc); /* Бело-серый градиент */
+    color: #000000; /* Чёрный текст при наведении */
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(127, 127, 128, 0.4);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
 .social-link i {
@@ -167,28 +167,27 @@ body {
     }
     
     .social-link {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     
     .social-link i {
         font-size: 1rem;
     }
+}
+
+@media (max-width: 480px) {
+    .social-icons {
+        gap: 0.5rem;
+    }
     
-    /* На очень маленьких экранах делаем иконки меньше */
-    @media (max-width: 480px) {
-        .social-icons {
-            gap: 0.5rem;
-        }
-        
-        .social-link {
-            width: 35px;
-            height: 35px;
-        }
-        
-        .social-link i {
-            font-size: 0.9rem;
-        }
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .social-link i {
+        font-size: 0.9rem;
     }
 }
 
@@ -201,7 +200,7 @@ body {
 .intro h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #000000, #262527);
+    background: linear-gradient(45deg, #ffffff, #cccccc); /* Бело-серый градиент */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -209,16 +208,17 @@ body {
 
 .intro p {
     font-size: 1.2rem;
-    opacity: 0.8;
+    opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
+    color: #ffffff; /* Белый текст */
 }
 
 .gallery h3 {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #d4d4d4;
+    color: #ffffff; /* Белый текст */
 }
 
 /* Сетка галереи */
@@ -240,7 +240,7 @@ body {
 
 .photo-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
 }
 
 .photo-container {
@@ -279,14 +279,15 @@ body {
 }
 
 .view-btn {
-    background: linear-gradient(45deg, #000000, #262527);
-    color: white;
+    background: linear-gradient(45deg, #ffffff, #cccccc); /* Бело-серый градиент */
+    color: #000000; /* Чёрный текст */
     border: none;
     padding: 10px 20px;
     border-radius: 25px;
     cursor: pointer;
     font-size: 1rem;
     transition: transform 0.3s ease;
+    font-weight: bold;
 }
 
 .view-btn:hover {
@@ -300,13 +301,14 @@ body {
 .photo-info h4 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
-    color: #d4d4d4;
+    color: #ffffff; /* Белый текст */
 }
 
 .photo-info p {
     font-size: 0.9rem;
-    opacity: 0.7;
+    opacity: 0.8;
     line-height: 1.4;
+    color: #ffffff; /* Белый текст */
 }
 
 /* Модальное окно */
@@ -318,7 +320,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.95); /* Чёрный с прозрачностью */
     backdrop-filter: blur(5px);
 }
 
@@ -353,6 +355,7 @@ body {
 
 .close-btn:hover {
     background: rgba(255, 255, 255, 0.2);
+    color: #000000;
 }
 
 #modalImage {
@@ -371,7 +374,12 @@ body {
 .modal-info h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #d4d4d4;
+    color: #ffffff; /* Белый текст */
+}
+
+.modal-info p {
+    color: #ffffff; /* Белый текст */
+    opacity: 0.9;
 }
 
 /* Адаптивность галереи */
