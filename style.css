@@ -9,7 +9,7 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #d4d4d4;
     background-color: #0a0a2a;
     color: white;
 }
@@ -72,7 +72,7 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    background: linear-gradient(45deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #000000, #262527);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -150,9 +150,9 @@ body {
 }
 
 .social-link:hover {
-    background: linear-gradient(45deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #000000, #262527);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 5px 15px rgba(127, 127, 128, 0.4);
 }
 
 .social-link i {
@@ -182,8 +182,8 @@ body {
         }
         
         .social-link {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
         }
         
         .social-link i {
@@ -201,7 +201,7 @@ body {
 .intro h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #000000, #262527);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -218,13 +218,13 @@ body {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #667eea;
+    color: #d4d4d4;
 }
 
 /* Сетка галереи */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     padding: 1rem 0;
 }
@@ -246,7 +246,7 @@ body {
 .photo-container {
     position: relative;
     overflow: hidden;
-    max-height: 400px;
+    max-height: 300px;
 }
 
 .photo {
@@ -279,7 +279,7 @@ body {
 }
 
 .view-btn {
-    background: linear-gradient(45deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #000000, #262527);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -300,7 +300,7 @@ body {
 .photo-info h4 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
-    color: #667eea;
+    color: #d4d4d4;
 }
 
 .photo-info p {
@@ -371,7 +371,7 @@ body {
 .modal-info h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #667eea;
+    color: #d4d4d4;
 }
 
 /* Адаптивность галереи */
