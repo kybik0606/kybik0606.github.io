@@ -247,17 +247,21 @@ body {
     position: relative;
     overflow: hidden;
     max-height: 300px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
 .photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     transition: transform 0.3s ease;
 }
 
 .photo-card:hover .photo {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .photo-overlay {
@@ -296,6 +300,7 @@ body {
 
 .photo-info {
     padding: 1.5rem;
+    text-align: center;
 }
 
 .photo-info h4 {
