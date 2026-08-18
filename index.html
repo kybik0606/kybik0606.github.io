@@ -3,16 +3,224 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Space Portfolio</title>
+  <title>Space Portfolio — новая галерея</title>
+  <!-- Font Awesome для иконок (оставлено, если нужно в других местах) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Базовые стили страницы */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0b0d17;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #eaeef2;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    header.header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #2b2f42;
+      padding-bottom: 1.2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #b8e1ff, #6ea8fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-link {
+      color: #a0b5cc;
+      font-size: 1.8rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-link:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .intro p {
+      color: #abb8c9;
+      font-size: 1.2rem;
+    }
+    .gallery h3 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      border-bottom: 1px dashed #2e3a4e;
+      padding-bottom: 0.7rem;
+    }
+    /* НОВАЯ СЕТКА: карточки одна под другой, изображение полной ширины, описание снизу */
+    .gallery-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem; /* вертикальный отступ между работами */
+    }
+    .photo-card {
+      background: #121625;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease;
+    }
+    .photo-card:hover {
+      transform: translateY(-4px);
+    }
+    /* Контейнер фото — теперь изображение само по себе, без оверлея и кнопки */
+    .photo-container {
+      width: 100%;
+      cursor: zoom-in; /* подсказка, что фото кликабельно */
+      background: #0a0c14;
+    }
+    .photo-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 80vh; /* ограничение по высоте, чтобы не занимало слишком много на широких мониторах */
+      object-fit: contain; /* сохраняем пропорции, если max-height сработает */
+      background: #05070c;
+      transition: opacity 0.3s;
+    }
+    .photo-container img:hover {
+      opacity: 0.96;
+    }
+    /* Блок описания — теперь всегда под фото, с центрированием */
+    .photo-info {
+      padding: 1.5rem 1.8rem 1.8rem;
+      text-align: center;
+      background: #0f1420;
+      border-top: 1px solid #293241;
+    }
+    .photo-info h4 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #f0f6ff;
+      letter-spacing: 0.3px;
+    }
+    .photo-info p {
+      font-size: 1.05rem;
+      color: #a7b6c9;
+      margin: 0;
+    }
+    /* Убираем overlay и кнопку полностью, они больше не нужны */
+    .photo-overlay, .view-btn {
+      display: none;
+    }
+    /* Модальное окно (оставлено для полноэкранного просмотра) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.92);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .modal-content {
+      position: relative;
+      background: #0f111c;
+      padding: 1.2rem;
+      border-radius: 20px;
+      max-width: 95%;
+      max-height: 95%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 60px #000000;
+    }
+    .modal-content img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .close-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 2.5rem;
+      color: #ffffff;
+      cursor: pointer;
+      background: #1e2636;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid #3a465e;
+      transition: 0.2s;
+    }
+    .close-btn:hover {
+      background: #2c3a55;
+      transform: scale(1.05);
+    }
+    .modal-info {
+      text-align: center;
+      margin-top: 1rem;
+      color: #dbe4f0;
+    }
+    .modal-info h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.2rem;
+    }
+    .modal-info p {
+      font-size: 1rem;
+      color: #b0bed1;
+    }
+    /* Адаптивность для узких экранов */
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .photo-info h4 {
+        font-size: 1.3rem;
+      }
+      .photo-info p {
+        font-size: 0.95rem;
+      }
+      .gallery-grid {
+        gap: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="container">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1rem; flex-wrap: wrap;">
       <h1 class="logo">Chernik Astronomer</h1>
-      
-      <!-- Блок с иконками соцсетей -->
       <div class="social-icons">
         <a href="https://t.me/chernik_astronomer" target="_blank" class="social-link">
           <i class="fab fa-telegram"></i>
@@ -30,177 +238,153 @@
   <main class="main">
     <div class="container">
       <section class="intro">
-      <h2>Добро пожаловать в моё космическое портфолио!</h2>
-      <p>Здесь вы найдете мои лучшие астрофотографии.</p>
+        <h2>Добро пожаловать в моё космическое портфолио!</h2>
+        <p>Здесь вы найдете мои лучшие астрофотографии — теперь в полном размере с описанием.</p>
       </section>
 
-<section class="gallery">
+      <section class="gallery">
         <h3>Мои работы</h3>
+        <!-- Новая структура: вертикальный список, каждая карточка = изображение + описание -->
         <div class="gallery-grid">
 
+          <!-- Карточка 1: Сверхновая -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/SN 2026sqf.jpg" alt="Сверхновая SN 2026sqf в галактике NGC3310" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/SN 2026sqf.jpg" data-title="Сверхновая SN 2026sqf в галактике NGC3310" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 30.07.2026">
+              <img src="images/SN 2026sqf.jpg" alt="Сверхновая SN 2026sqf в галактике NGC3310">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Сверхновая SN 2026sqf в галактике NGC3310</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 30.07.2026</p>
+              <h4>Сверхновая SN 2026sqf в галактике NGC3310</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 30.07.2026</p>
             </div>
           </div>
 
+          <!-- Карточка 2: NGC5906 -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/NGC5906.png" alt="Галактика лезвие ножа (NGC5906)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/NGC5906.png" data-title="Галактика лезвие ножа (NGC5906)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 120 минут • Дата: 30.07.2026">
+              <img src="images/NGC5906.png" alt="Галактика лезвие ножа (NGC5906)">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Галактика лезвие ножа (NGC5906)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 120 минут • Дата: 30.07.2026</p>
+              <h4>Галактика лезвие ножа (NGC5906)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 120 минут • Дата: 30.07.2026</p>
             </div>
           </div>
 
+          <!-- Карточка 3: Юпитер -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/2026-05-02-1904_6-L_lapl4_ap51_Drizzle15.jpg" alt="Планета Юпитер" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/2026-05-02-1904_6-L_lapl4_ap51_Drizzle15.jpg" data-title="Планета Юпитер" data-desc="Телескоп: Sky-Watcher 130PDS • Дата: 02.05.2026">
+              <img src="images/2026-05-02-1904_6-L_lapl4_ap51_Drizzle15.jpg" alt="Планета Юпитер">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Планета Юпитер</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Дата: 02.05.2026</p>
+              <h4>Планета Юпитер</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 02.05.2026</p>
             </div>
           </div>
 
+          <!-- Карточка 4: Солнце -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/Солнце.jpg" alt="Звезда Солнце" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/Солнце.jpg" data-title="Звезда Солнце" data-desc="Телескоп: Sky-Watcher 130PDS • Дата: 15.08.2025">
+              <img src="images/Солнце.jpg" alt="Звезда Солнце">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Звезда Солнце</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Дата: 15.08.2025</p>
+              <h4>Звезда Солнце</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 15.08.2025</p>
             </div>
           </div>
 
+          <!-- Карточка 5: Лунное затмение -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/MOON_07_09_2025.jpg" alt="Лунное затмение" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/MOON_07_09_2025.jpg" data-title="Лунное затмение" data-desc="Телескоп: Sky-Watcher 130PDS • Дата: 07.09.2025">
+              <img src="images/MOON_07_09_2025.jpg" alt="Лунное затмение">
             </div>
             <div class="photo-info">
-              <h4 style="text-align: center;">Лунное затмение</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Дата: 07.09.2025</p>
-            </div>
-          </div>
-          
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/c20231.jpg" alt="С/2023 A3" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
-            </div>
-            <div class="photo-info">
-               <h4 style="text-align: center;">Комета С/2023 A3</h4>
-              <p style="text-align: center;">Камера: Canon 700D • Объектив: 15-55mm • Дата: 12.10.2024</p>
+              <h4>Лунное затмение</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 07.09.2025</p>
             </div>
           </div>
 
+          <!-- Карточка 6: Комета C/2023 A3 (Canon) -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/c2023_GraXpert.jpg" alt="С/2023 A3" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/c20231.jpg" data-title="Комета С/2023 A3" data-desc="Камера: Canon 700D • Объектив: 15-55mm • Дата: 12.10.2024">
+              <img src="images/c20231.jpg" alt="Комета С/2023 A3">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Комета С/2023 A3</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Дата: 18.10.2024</p>
+              <h4>Комета С/2023 A3</h4>
+              <p>Камера: Canon 700D • Объектив: 15-55mm • Дата: 12.10.2024</p>
             </div>
           </div>
 
+          <!-- Карточка 7: Комета C/2023 A3 (Sky-Watcher) -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/M57_2025.jpg" alt="Туманность кольцо(M57)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/c2023_GraXpert.jpg" data-title="Комета С/2023 A3" data-desc="Телескоп: Sky-Watcher 130PDS • Дата: 18.10.2024">
+              <img src="images/c2023_GraXpert.jpg" alt="Комета С/2023 A3">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Туманность кольцо(M57)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 105 минут • Дата: 23.10.2024</p>
+              <h4>Комета С/2023 A3</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 18.10.2024</p>
             </div>
           </div>
 
+          <!-- Карточка 8: M57 -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/MM63.jpg" alt="Галактика Подсолнух(M63)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/M57_2025.jpg" data-title="Туманность кольцо (M57)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 105 минут • Дата: 23.10.2024">
+              <img src="images/M57_2025.jpg" alt="Туманность кольцо (M57)">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Галактика Подсолнух(M63)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 02.08.2025</p>
+              <h4>Туманность кольцо (M57)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 105 минут • Дата: 23.10.2024</p>
             </div>
           </div>
 
+          <!-- Карточка 9: M63 Подсолнух -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/M82.jpg" alt="Галактика Сигара(M82)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/MM63.jpg" data-title="Галактика Подсолнух (M63)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 02.08.2025">
+              <img src="images/MM63.jpg" alt="Галактика Подсолнух (M63)">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Галактика Сигара(M82)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 28 минут • Дата: 31.05.2025</p>
+              <h4>Галактика Подсолнух (M63)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 02.08.2025</p>
             </div>
           </div>
 
+          <!-- Карточка 10: M82 Сигара -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/NGC6166.jpg" alt="Скопление галактик(NGC6166)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/M82.jpg" data-title="Галактика Сигара (M82)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 28 минут • Дата: 31.05.2025">
+              <img src="images/M82.jpg" alt="Галактика Сигара (M82)">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Скопление галактик(NGC6166)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 142 минуты • Дата: 03.08.2025</p>
+              <h4>Галактика Сигара (M82)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 28 минут • Дата: 31.05.2025</p>
             </div>
           </div>
 
+          <!-- Карточка 11: NGC6166 скопление -->
           <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/PK47+42.1.jpg" alt="Планетарная туманность(Abell 39)" class="photo">
-              <div class="photo-overlay">
-                <button class="view-btn">Увеличить</button>
-              </div>
+            <div class="photo-container" data-full="images/NGC6166.jpg" data-title="Скопление галактик (NGC6166)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 142 минуты • Дата: 03.08.2025">
+              <img src="images/NGC6166.jpg" alt="Скопление галактик (NGC6166)">
             </div>
             <div class="photo-info">
-               <h4 style="text-align: center;">Планетарная туманность(Abell 39)</h4>
-              <p style="text-align: center;">Телескоп: Sky-Watcher 130PDS • Выдержка: 52 минуты • Дата: 03.08.2025</p>
+              <h4>Скопление галактик (NGC6166)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 142 минуты • Дата: 03.08.2025</p>
+            </div>
+          </div>
+
+          <!-- Карточка 12: Abell 39 -->
+          <div class="photo-card">
+            <div class="photo-container" data-full="images/PK47+42.1.jpg" data-title="Планетарная туманность (Abell 39)" data-desc="Телескоп: Sky-Watcher 130PDS • Выдержка: 52 минуты • Дата: 03.08.2025">
+              <img src="images/PK47+42.1.jpg" alt="Планетарная туманность (Abell 39)">
+            </div>
+            <div class="photo-info">
+              <h4>Планетарная туманность (Abell 39)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 52 минуты • Дата: 03.08.2025</p>
             </div>
           </div>
 
         </div>
       </section>
-
     </div>
   </main>
 
-  <!-- Модальное окно для просмотра фото -->
+  <!-- Модальное окно для полноэкранного просмотра (по клику на фото) -->
   <div class="modal" id="photoModal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
@@ -212,7 +396,67 @@
     </div>
   </div>
 
-   <script src="gallery.js"></script>
-  <script src="mobile-menu.js"></script>
+  <script>
+    (function() {
+      // Модальное окно и элементы
+      const modal = document.getElementById('photoModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDescription');
+      const closeBtn = document.querySelector('.close-btn');
+
+      // Функция открытия модального окна
+      function openModal(imageSrc, title, desc) {
+        modalImg.src = imageSrc;
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // блокируем прокрутку фона
+      }
+
+      // Функция закрытия
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Вешаем обработчики на все photo-container (клик по изображению)
+      const containers = document.querySelectorAll('.photo-container');
+      containers.forEach(container => {
+        container.addEventListener('click', function(e) {
+          const full = this.getAttribute('data-full');
+          const title = this.getAttribute('data-title');
+          const desc = this.getAttribute('data-desc');
+          if (full) {
+            openModal(full, title, desc);
+          }
+        });
+      });
+
+      // Закрытие по крестику
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // Закрытие по клику вне модального окна (по фону)
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Закрытие по клавише Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+  <!-- Дополнительный скрипт mobile-menu не требуется, но ссылка оставлена для совместимости (пустой) -->
+  <script>
+    // mobile-menu.js может отсутствовать, оставляем заглушку, чтобы не было ошибок
+    console.log('Галерея переработана: фото в полном размере друг под другом, описание снизу.');
+  </script>
 </body>
 </html>
