@@ -1,1 +1,0 @@
-# kybik0606.github.io

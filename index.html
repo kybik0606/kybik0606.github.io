@@ -1,362 +1,230 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Space Portfolio</title>
-  <!-- Font Awesome для иконок соцсетей -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background: #0b0d17;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      color: #eaeef2;
-      line-height: 1.5;
-      padding: 2rem 1rem;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    header.header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid #2b2f42;
-      padding-bottom: 1.2rem;
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #b8e1ff, #6ea8fe);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .social-icons {
-      display: flex;
-      gap: 1.2rem;
-    }
-    .social-link {
-      color: #a0b5cc;
-      font-size: 1.8rem;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .social-link:hover {
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-    .intro {
-      text-align: center;
-      margin-bottom: 2.8rem;
-    }
-    .intro h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .intro p {
-      color: #abb8c9;
-      font-size: 1.2rem;
-    }
-    .gallery h3 {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      font-weight: 400;
-      border-bottom: 1px dashed #2e3a4e;
-      padding-bottom: 0.7rem;
-    }
-    /* НОВАЯ СЕТКА: фотографии одна под другой, без рамок, с разделителями */
-    .gallery-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0; /* отступы будут задаваться линиями */
-    }
-    .photo-card {
-      /* Убираем фон, тени, скругления — фото как бы на фоне страницы */
-      background: transparent;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
-      margin: 0;
-      display: block;
-      width: 100%;
-      position: relative;
-      padding-bottom: 2.8rem; /* небольшой отступ до разделителя */
-      margin-bottom: 2.8rem;
-      border-bottom: 1px solid #3a4359; /* линия-разделитель подходящего цвета */
-    }
-    /* Последний элемент без нижней линии (по желанию) */
-    .photo-card:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    .photo-container {
-      width: 100%;
-      display: block;
-      cursor: default; /* клик не нужен, модальное окно убрано */
-      background: transparent;
-      margin: 0;
-      padding: 0;
-    }
-    .photo-container img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 80vh;
-      object-fit: contain;
-      background: transparent; /* прозрачный фон, изображение как бы на фоне body */
-      transition: none;
-      margin: 0;
-    }
-    .photo-info {
-      padding: 1.2rem 0.5rem 0.8rem; /* отступы без рамки */
-      text-align: center;
-      background: transparent;
-      border-top: none;
-      color: #d3dce8;
-    }
-    .photo-info h4 {
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-      color: #f0f6ff;
-      letter-spacing: 0.3px;
-    }
-    .photo-info p {
-      font-size: 1.05rem;
-      color: #a7b6c9;
-      margin: 0;
-    }
-    /* Убираем любые упоминания о модальном окне и оверлеях */
-    .modal, .photo-overlay, .view-btn {
-      display: none;
-    }
-    /* Адаптивность */
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 1.5rem;
-      }
-      .photo-info h4 {
-        font-size: 1.3rem;
-      }
-      .photo-info p {
-        font-size: 0.95rem;
-      }
-      .photo-card {
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1rem; flex-wrap: wrap;">
-      <h1 class="logo">Chernik Astronomer</h1>
-      <div class="social-icons">
-        <a href="https://t.me/chernik_astronomer" target="_blank" class="social-link">
-          <i class="fab fa-telegram"></i>
-        </a>
-        <a href="https://www.instagram.com/chernik_astronomer/" target="_blank" class="social-link">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/kybik0606" target="_blank" class="social-link">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
-    </div>
-  </header>
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Aliaksei Chernik</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
 
-  <main class="main">
-    <div class="container">
-      <section class="intro">
-        <h2>Добро пожаловать в моё космическое портфолио!</h2>
-        <p>Здесь вы найдете мои лучшие астрофотографии.</p>
-      </section>
+		<!-- Header -->
+			<div id="header">
 
-      <section class="gallery">
-        <h3>Мои работы</h3>
-        <div class="gallery-grid">
+				<div class="top">
 
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/r_stack_stacked_wo_starnet.jpg" alt="Галактика Вертушка (M 101)">
-            </div>
-            <div class="photo-info">
-              <h4>Галактика Вертушка (M 101)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 48 минут + 48 минут • Дата: 2026.08.25 & 2024.10.23</p>
-            </div>
-          </div>
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<h1 id="title">Aliaksei Chernik</h1>
+							<p>Amateur Astronomer</p>
+							<p>Cybersecurity Student</p>
+						</div>
 
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/triplet_add.jpg" alt="Триплет Цвикки (Arp 103)">
-            </div>
-            <div class="photo-info">
-              <h4>Триплет Цвикки (Arp 103)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 70 минут • Дата: 23.08.2026</p>
-            </div>
-          </div>
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
+								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-star">Astronomy</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-shield-alt">Cybersecurity</span></a></li>
+								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
+							</ul>
+						</nav>
 
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/asteroid 186822.jpg" alt="Астероид (186822) 2004 FE31">
-            </div>
-            <div class="photo-info">
-              <h4>Астероид (186822) 2004 FE31</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 145 минут • Дата: 23.08.2026</p>
-            </div>
-          </div>
+				</div>
 
-          <!-- 1. Сверхновая -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/SN 2026sqf.jpg" alt="Сверхновая SN 2026sqf в галактике NGC3310">
-            </div>
-            <div class="photo-info">
-              <h4>Сверхновая SN 2026sqf в галактике NGC3310</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 30.07.2026</p>
-            </div>
-          </div>
+				<div class="bottom">
 
-          <!-- 2. NGC5906 -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/NGC5906.png" alt="Галактика лезвие ножа (NGC5906)">
-            </div>
-            <div class="photo-info">
-              <h4>Галактика лезвие ножа (NGC5906)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 120 минут • Дата: 30.07.2026</p>
-            </div>
-          </div>
+					<!-- Social Icons -->
+						<ul class="icons">
+							<li><a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+							<li><a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/kybik0606" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							<li><a href="mailto:chernikaliaksei2006@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
 
-          <!-- 3. Юпитер -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/2026-05-02-1904_6-L_lapl4_ap51_Drizzle15.jpg" alt="Планета Юпитер">
-            </div>
-            <div class="photo-info">
-              <h4>Планета Юпитер</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Дата: 02.05.2026</p>
-            </div>
-          </div>
+				</div>
 
-          <!-- 4. Солнце -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/Солнце.jpg" alt="Звезда Солнце">
-            </div>
-            <div class="photo-info">
-              <h4>Звезда Солнце</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Дата: 15.08.2025</p>
-            </div>
-          </div>
+			</div>
 
-          <!-- 5. Лунное затмение -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/MOON_07_09_2025.jpg" alt="Лунное затмение">
-            </div>
-            <div class="photo-info">
-              <h4>Лунное затмение</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Дата: 07.09.2025</p>
-            </div>
-          </div>
+		<!-- Main -->
+			<div id="main">
 
-          <!-- 6. Комета C/2023 A3 (Canon) -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/c20231.jpg" alt="Комета С/2023 A3">
-            </div>
-            <div class="photo-info">
-              <h4>Комета С/2023 A3</h4>
-              <p>Камера: Canon 700D • Объектив: 15-55mm • Дата: 12.10.2024</p>
-            </div>
-          </div>
+				<!-- Intro -->
+					<section id="top" class="one dark cover" style="
+					background-image: url('images/r_stack_stacked_wo_starnet.jpg');
+					background-size: cover;
+					background-position: center center;
+					background-repeat: no-repeat;
+					min-height: 100vh;
+					">
+						<div class="container">
 
-          <!-- 7. Комета C/2023 A3 (Sky-Watcher) -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/c2023_GraXpert.jpg" alt="Комета С/2023 A3">
-            </div>
-            <div class="photo-info">
-              <h4>Комета С/2023 A3</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Дата: 18.10.2024</p>
-            </div>
-          </div>
+							<header>
+								<h2 class="alt">Hi! I'm <strong>Aliaksei Chernik</strong>,<br />
+								amateur astronomer and cybersecurity student.</h2>
+								<p>I photograph deep-sky objects, planets and comets, and study information security.</p>
+							</header>
 
-          <!-- 8. M57 -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/M57_2025.jpg" alt="Туманность кольцо (M57)">
-            </div>
-            <div class="photo-info">
-              <h4>Туманность кольцо (M57)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 105 минут • Дата: 23.10.2024</p>
-            </div>
-          </div>
+							<footer>
+								<a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram"> Telegram</a>
+								&nbsp;&nbsp;&nbsp;
+								<a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram"> Instagram</a>
+								&nbsp;&nbsp;&nbsp;
+								<a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin"> LinkedIn</a>
+								&nbsp;&nbsp;&nbsp;
+								<a href="https://github.com/kybik0606" class="icon brands fa-github"> GitHub</a>
+								&nbsp;&nbsp;&nbsp;
+								<a href="mailto:chernikaliaksei2006@gmail.com" class="icon fa-envelope"> E-mail</a>
+							</footer>
 
-          <!-- 9. M63 Подсолнух -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/MM63.jpg" alt="Галактика Подсолнух (M63)">
-            </div>
-            <div class="photo-info">
-              <h4>Галактика Подсолнух (M63)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 02.08.2025</p>
-            </div>
-          </div>
+						</div>
+					</section>
 
-          <!-- 10. M82 Сигара -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/M82.jpg" alt="Галактика Сигара (M82)">
-            </div>
-            <div class="photo-info">
-              <h4>Галактика Сигара (M82)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 28 минут • Дата: 31.05.2025</p>
-            </div>
-          </div>
+				<!-- Astronomy -->
+					<section id="portfolio" class="two">
+						<div class="container">
 
-          <!-- 11. NGC6166 скопление -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/NGC6166.jpg" alt="Скопление галактик (NGC6166)">
-            </div>
-            <div class="photo-info">
-              <h4>Скопление галактик (NGC6166)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 142 минуты • Дата: 03.08.2025</p>
-            </div>
-          </div>
+							<header>
+								<h2>Astronomy</h2>
+							</header>
 
-          <!-- 12. Abell 39 -->
-          <div class="photo-card">
-            <div class="photo-container">
-              <img src="images/PK47+42.1.jpg" alt="Планетарная туманность (Abell 39)">
-            </div>
-            <div class="photo-info">
-              <h4>Планетарная туманность (Abell 39)</h4>
-              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 52 минуты • Дата: 03.08.2025</p>
-            </div>
-          </div>
+							<p>Amateur astrophotography from Belarus. Deep-sky objects, planets, comets and the Moon,
+							mostly shot with a Sky-Watcher 130PDS reflector. Below are some of my favourite captures.</p>
 
-        </div>
-      </section>
-    </div>
-  </main>
+							<div class="row">
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="images/r_stack_stacked_wo_starnet.jpg" class="image fit"><img src="images/r_stack_stacked_wo_starnet.jpg" alt="M 101" /></a>
+										<header>
+											<h4>M 101 - Pinwheel Galaxy</h4>
+											<h3>I had photographed this galaxy before, so I used some frames from 2024 as well. 
+											Besides the galaxy itself, the image shows regions of ionized hydrogen where star formation is actively ongoing.
+											<br /><br />
+											2026.08.25 &amp; 2024.10.23 | Sky-Watcher 130PDS | ZWO 585MC (IMX585) | 1.6 hours (24 × 120 s + 16 × 180 s)</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="images/asteroid_186822.jpg" class="image fit"><img src="images/asteroid_186822.jpg" alt="Asteroid (186822) 2004 FE31" /></a>
+										<header>
+											<h4>Asteroid (186822) 2004 FE31</h4>
+											<h3>I captured an object that is quite hard to catch - asteroid 186822. It is about 1 km across. At magnitude 18-19, it is near the limit of amateur telescopes. To see it, I stacked frames in ASTAP with the asteroid's orbital motion - so the stars trailed into lines while it stayed a point. The post also has a timelapse and a normal star-aligned stack where the asteroid is not visible at all.</h3>
+										</header>
+									</article>			
+									<article class="item">
+										<a href="images/NGC5906.png" class="image fit"><img src="images/NGC5906.png" alt="NGC 5906" /></a>
+										<header>
+											<h4>NGC 5906 - Knife Edge Galaxy</h4>
+											<h3>This galaxy is interesting because it is turned edge-on to us, so we see it as a thin strip - which is how it got its name. There is also a lot of hydrogen in the background, which could become visible with longer integration time.
+											<br /><br />
+											2026.07.30 | Sky-Watcher 130PDS | ZWO 585MC (IMX585) | 2 hours (60 × 120 s)</h3>
+										</header>
+									</article>
+								</div>
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="images/sn_2026sqf.jpg" class="image fit"><img src="images/sn_2026sqf.jpg" alt="SN 2026sqf in NGC 3310" /></a>
+										<header>
+											<h4>SN 2026sqf in NGC 3310</h4>
+											<h3>SN 2026sqf was discovered in the galaxy NGC 3310, located in Ursa Major about 50 million light-years away. This is already the third supernova found in this galaxy - likely because NGC 3310 collided with another galaxy in the distant past, which boosted its star formation rate. The supernova is fairly bright at around magnitude 11.5 and can be captured with a telescope and camera.</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="images/jupiter.jpg" class="image fit"><img src="images/jupiter.jpg" alt="Jupiter" /></a>
+										<header>
+											<h4>Jupiter</h4>
+											<h3>2026.05.02 | Sky-Watcher 130PDS | ZWO 585MC | 1300 mm (2× Barlow)</h3>
+										</header>
+									</article>
+								</div>
+								<div class="col-4 col-12-mobile">
+									<article class="item">
+										<a href="images/moon_eclipse.jpg" class="image fit"><img src="images/moon_eclipse.jpg" alt="Lunar Eclipse" /></a>
+										<header>
+											<h4>Lunar Eclipse</h4>
+											<h3>2025.09.07 | Sky-Watcher 130PDS | ZWO 585MC</h3>
+										</header>
+									</article>
+									<article class="item">
+										<a href="images/c2023_GraXpert.jpg" class="image fit"><img src="images/c2023_GraXpert.jpg" alt="Comet C/2023 A3 (Tsuchinshan-ATLAS)" /></a>
+										<header>
+											<h4>Comet C/2023 A3 (Tsuchinshan-ATLAS)</h4>
+											<h3>2024.10.18 | Sky-Watcher 130PDS | ZWO 585MC | 48.5 minutes (97 × 30 s)</h3>
+										</header>
+									</article>
+								</div>
+							</div>
 
-  <!-- Модальное окно полностью удалено из разметки, скриптов для него нет -->
-</body>
+							<p style="margin-top: 2em;">More photos are on my <a href="https://t.me/chernik_astronomer">Telegram</a> and <a href="https://www.instagram.com/chernik_astronomer/">Instagram</a>.</p>
+
+						</div>
+					</section>
+
+				<!-- Cybersecurity -->
+					<section id="about" class="three">
+						<div class="container">
+
+							<header>
+								<h2>Cybersecurity</h2>
+							</header>
+
+							<a href="#" class="image featured" style="max-width: 300px; margin: 0 auto; display: block;">
+								<img src="images/cyber.jpg" alt="" />
+							</a>
+
+							<p>4th-year student at the Faculty of Radiophysics and Computer Technologies, Belarusian State University (BSU), majoring in Cybersecurity. Throughout my studies I have built a solid theoretical foundation in IT and information security. 
+							Key knowledge and skills: understanding of the core principles of information security (confidentiality, integrity, availability). Knowledge of operating system architecture and computer network design. Basic skills in network modelling with Cisco Packet Tracer.</p>
+
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="contact" class="four">
+						<div class="container">
+
+							<header>
+								<h2>Contact</h2>
+							</header>
+
+							<p>Best way to reach me is via Telegram or email. I'm always happy to talk about astrophotography, or collaboration.</p>
+
+							<ul class="icons" style="justify-content: center; display: flex; gap: 1.5em; font-size: 1.4em;">
+								<li><a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+								<li><a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://github.com/kybik0606" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								<li><a href="mailto:chernikaliaksei2006@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+
+				<!-- Copyright -->
+					<ul class="copyright">
+						<li>&copy; 2026 Aliaksei Chernik. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

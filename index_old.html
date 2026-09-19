@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Portfolio</title>
+  <!-- Font Awesome для иконок соцсетей -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0b0d17;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #eaeef2;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    header.header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #2b2f42;
+      padding-bottom: 1.2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #b8e1ff, #6ea8fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-link {
+      color: #a0b5cc;
+      font-size: 1.8rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-link:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+    .intro h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .intro p {
+      color: #abb8c9;
+      font-size: 1.2rem;
+    }
+    .gallery h3 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      border-bottom: 1px dashed #2e3a4e;
+      padding-bottom: 0.7rem;
+    }
+    /* НОВАЯ СЕТКА: фотографии одна под другой, без рамок, с разделителями */
+    .gallery-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0; /* отступы будут задаваться линиями */
+    }
+    .photo-card {
+      /* Убираем фон, тени, скругления — фото как бы на фоне страницы */
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      display: block;
+      width: 100%;
+      position: relative;
+      padding-bottom: 2.8rem; /* небольшой отступ до разделителя */
+      margin-bottom: 2.8rem;
+      border-bottom: 1px solid #3a4359; /* линия-разделитель подходящего цвета */
+    }
+    /* Последний элемент без нижней линии (по желанию) */
+    .photo-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .photo-container {
+      width: 100%;
+      display: block;
+      cursor: default; /* клик не нужен, модальное окно убрано */
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+    .photo-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      background: transparent; /* прозрачный фон, изображение как бы на фоне body */
+      transition: none;
+      margin: 0;
+    }
+    .photo-info {
+      padding: 1.2rem 0.5rem 0.8rem; /* отступы без рамки */
+      text-align: center;
+      background: transparent;
+      border-top: none;
+      color: #d3dce8;
+    }
+    .photo-info h4 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: #f0f6ff;
+      letter-spacing: 0.3px;
+    }
+    .photo-info p {
+      font-size: 1.05rem;
+      color: #a7b6c9;
+      margin: 0;
+    }
+    /* Убираем любые упоминания о модальном окне и оверлеях */
+    .modal, .photo-overlay, .view-btn {
+      display: none;
+    }
+    /* Адаптивность */
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .photo-info h4 {
+        font-size: 1.3rem;
+      }
+      .photo-info p {
+        font-size: 0.95rem;
+      }
+      .photo-card {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1rem; flex-wrap: wrap;">
+      <h1 class="logo">Chernik Astronomer</h1>
+      <div class="social-icons">
+        <a href="https://t.me/chernik_astronomer" target="_blank" class="social-link">
+          <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://www.instagram.com/chernik_astronomer/" target="_blank" class="social-link">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/kybik0606" target="_blank" class="social-link">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <section class="intro">
+        <h2>Добро пожаловать в моё космическое портфолио!</h2>
+        <p>Здесь вы найдете мои лучшие астрофотографии.</p>
+      </section>
+
+      <section class="gallery">
+        <h3>Мои работы</h3>
+        <div class="gallery-grid">
+
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/r_stack_stacked_wo_starnet.jpg" alt="Галактика Вертушка (M 101)">
+            </div>
+            <div class="photo-info">
+              <h4>Галактика Вертушка (M 101)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 48 минут + 48 минут • Дата: 2026.08.25 & 2024.10.23</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/triplet_add.jpg" alt="Триплет Цвикки (Arp 103)">
+            </div>
+            <div class="photo-info">
+              <h4>Триплет Цвикки (Arp 103)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 70 минут • Дата: 23.08.2026</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/asteroid 186822.jpg" alt="Астероид (186822) 2004 FE31">
+            </div>
+            <div class="photo-info">
+              <h4>Астероид (186822) 2004 FE31</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 145 минут • Дата: 23.08.2026</p>
+            </div>
+          </div>
+
+          <!-- 1. Сверхновая -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/SN 2026sqf.jpg" alt="Сверхновая SN 2026sqf в галактике NGC3310">
+            </div>
+            <div class="photo-info">
+              <h4>Сверхновая SN 2026sqf в галактике NGC3310</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 30.07.2026</p>
+            </div>
+          </div>
+
+          <!-- 2. NGC5906 -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/NGC5906.png" alt="Галактика лезвие ножа (NGC5906)">
+            </div>
+            <div class="photo-info">
+              <h4>Галактика лезвие ножа (NGC5906)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 120 минут • Дата: 30.07.2026</p>
+            </div>
+          </div>
+
+          <!-- 3. Юпитер -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/2026-05-02-1904_6-L_lapl4_ap51_Drizzle15.jpg" alt="Планета Юпитер">
+            </div>
+            <div class="photo-info">
+              <h4>Планета Юпитер</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 02.05.2026</p>
+            </div>
+          </div>
+
+          <!-- 4. Солнце -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/Солнце.jpg" alt="Звезда Солнце">
+            </div>
+            <div class="photo-info">
+              <h4>Звезда Солнце</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 15.08.2025</p>
+            </div>
+          </div>
+
+          <!-- 5. Лунное затмение -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/MOON_07_09_2025.jpg" alt="Лунное затмение">
+            </div>
+            <div class="photo-info">
+              <h4>Лунное затмение</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 07.09.2025</p>
+            </div>
+          </div>
+
+          <!-- 6. Комета C/2023 A3 (Canon) -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/c20231.jpg" alt="Комета С/2023 A3">
+            </div>
+            <div class="photo-info">
+              <h4>Комета С/2023 A3</h4>
+              <p>Камера: Canon 700D • Объектив: 15-55mm • Дата: 12.10.2024</p>
+            </div>
+          </div>
+
+          <!-- 7. Комета C/2023 A3 (Sky-Watcher) -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/c2023_GraXpert.jpg" alt="Комета С/2023 A3">
+            </div>
+            <div class="photo-info">
+              <h4>Комета С/2023 A3</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Дата: 18.10.2024</p>
+            </div>
+          </div>
+
+          <!-- 8. M57 -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/M57_2025.jpg" alt="Туманность кольцо (M57)">
+            </div>
+            <div class="photo-info">
+              <h4>Туманность кольцо (M57)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 105 минут • Дата: 23.10.2024</p>
+            </div>
+          </div>
+
+          <!-- 9. M63 Подсолнух -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/MM63.jpg" alt="Галактика Подсолнух (M63)">
+            </div>
+            <div class="photo-info">
+              <h4>Галактика Подсолнух (M63)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 60 минут • Дата: 02.08.2025</p>
+            </div>
+          </div>
+
+          <!-- 10. M82 Сигара -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/M82.jpg" alt="Галактика Сигара (M82)">
+            </div>
+            <div class="photo-info">
+              <h4>Галактика Сигара (M82)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 28 минут • Дата: 31.05.2025</p>
+            </div>
+          </div>
+
+          <!-- 11. NGC6166 скопление -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/NGC6166.jpg" alt="Скопление галактик (NGC6166)">
+            </div>
+            <div class="photo-info">
+              <h4>Скопление галактик (NGC6166)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 142 минуты • Дата: 03.08.2025</p>
+            </div>
+          </div>
+
+          <!-- 12. Abell 39 -->
+          <div class="photo-card">
+            <div class="photo-container">
+              <img src="images/PK47+42.1.jpg" alt="Планетарная туманность (Abell 39)">
+            </div>
+            <div class="photo-info">
+              <h4>Планетарная туманность (Abell 39)</h4>
+              <p>Телескоп: Sky-Watcher 130PDS • Выдержка: 52 минуты • Дата: 03.08.2025</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Модальное окно полностью удалено из разметки, скриптов для него нет -->
+</body>
+</html>
