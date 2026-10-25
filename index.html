@@ -225,60 +225,8 @@
 				<!-- Cybersecurity -->
 					<section id="about" class="four">
 						
-						<!-- Стили для терминала и кнопки -->
+						<!-- Стили только для кнопки GitHub -->
 						<style>
-							.terminal-window {
-								background: #ffffff;
-								border-radius: 6px;
-								margin: 1.5em auto;
-								box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-								overflow: hidden;
-								font-family: 'Courier New', monospace;
-								max-width: 600px;
-								text-align: left;
-								border: 1px solid #eaeaea;
-							}
-							.terminal-header {
-								background: #f8f9fa;
-								padding: 8px 12px;
-								display: flex;
-								align-items: center;
-								border-bottom: 1px solid #eaeaea;
-							}
-							.terminal-header-icon {
-								color: #adb5bd;
-								font-size: 0.8em;
-								margin-right: 8px;
-							}
-							.terminal-header-text {
-								color: #888888;
-								font-size: 0.75em;
-								font-family: sans-serif;
-								font-weight: 500;
-							}
-							.terminal-body {
-								padding: 12px 15px;
-								color: #333333;
-								font-size: 0.7em;
-								line-height: 1.5;
-							}
-							.terminal-command {
-								margin-bottom: 10px;
-								word-wrap: break-word;
-							}
-							.terminal-line {
-								margin-bottom: 4px;
-								display: flex;
-								flex-wrap: wrap;
-							}
-							.terminal-label {
-								color: #d73a49;
-								width: 85px;
-								flex-shrink: 0;
-							}
-							.terminal-value {
-								color: #333333;
-							}
 							.github-btn {
 								display: inline-flex;
 								align-items: center;
@@ -290,30 +238,11 @@
 								text-decoration: none;
 								font-weight: 600;
 								font-size: 0.9em;
-								transition: background-color 0.2s ease; /* Убрано движение */
+								transition: background-color 0.2s ease;
 								box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 							}
 							.github-btn:hover {
-								background-color: #4b535a; /* Только смена цвета */
-							}
-							
-							/* Адаптивность для мобильных телефонов */
-							@media screen and (max-width: 600px) {
-								.terminal-window {
-									margin: 1em 0; /* Убираем лишние отступы по бокам на мобильном */
-								}
-								.terminal-body {
-									font-size: 0.65em; /* Уменьшаем шрифт на телефоне */
-									padding: 10px;
-								}
-								.terminal-label {
-									width: 100%; /* На телефоне лейбл будет над значением */
-									margin-bottom: 2px;
-								}
-								.github-btn {
-									padding: 0.7em 1.2em;
-									font-size: 0.85em;
-								}
+								background-color: #4b535a;
 							}
 						</style>
 
@@ -338,54 +267,15 @@
 									A lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
 								</p>
 								
-								<!-- Окно терминала -->
-								<div class="terminal-window">
-									
-									<!-- Шапка окна (мягкий цвет и вес текста) -->
-									<div class="terminal-header">
-										<i class="icon solid fa-terminal terminal-header-icon"></i>
-										<span class="terminal-header-text">aliaksei@astroprov: ~</span>
-									</div>
-									
-									<!-- Контент -->
-									<div class="terminal-body">
-										
-										<!-- Linux Prompt -->
-										<div class="terminal-command">
-											<span style="color: #28a745; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #0056b3; font-weight: bold;">~</span>$ astroprov --tech-stack
-										</div>
-										
-										<!-- Вывод технологий (с адаптивной версткой) -->
-										<div style="margin-bottom: 8px;">
-											<div class="terminal-line">
-												<span class="terminal-label">[Language]</span>
-												<span class="terminal-value">Python 3.10+</span>
-											</div>
-											<div class="terminal-line">
-												<span class="terminal-label">[Crypto]</span>
-												<span class="terminal-value">Ed25519 Digital Signatures</span>
-											</div>
-											<div class="terminal-line">
-												<span class="terminal-label">[Hashing]</span>
-												<span class="terminal-value">SHA-256 & Merkle Trees</span>
-											</div>
-											<div class="terminal-line">
-												<span class="terminal-label">[Data]</span>
-												<span class="terminal-value">FITS (Flexible Image Transport System)</span>
-											</div>
-										</div>
-										
-										<!-- Статус -->
-										<div style="color: #28a745; margin-top: 10px; word-wrap: break-word;">[✓] Core security modules initialized successfully.</div>
-										
-										<!-- Финальный prompt -->
-										<div style="margin-top: 15px;">
-											<span style="color: #28a745; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #0056b3; font-weight: bold;">~</span>$ <span style="animation: blink 1s step-end infinite;">_</span>
-										</div>
-									</div>
+								<!-- Плашки технологий (по центру, адаптивные) -->
+								<div style="margin: 1.5em 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+									<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+									<img src="https://img.shields.io/badge/SHA--256-4B0082?style=for-the-badge&logo=letsencrypt&logoColor=white" alt="SHA-256" />
+									<img src="https://img.shields.io/badge/Ed25519-00599C?style=for-the-badge&logo=securityscorecard&logoColor=white" alt="Ed25519" />
+									<img src="https://img.shields.io/badge/FITS-FF6F00?style=for-the-badge&logo=databricks&logoColor=white" alt="FITS Data" />
 								</div>
 
-								<!-- Ссылка на GitHub -->
+								<!-- Ссылка на GitHub (кнопка без изменений) -->
 								<div style="margin-top: 1.5em; text-align: center;">
 									<a href="https://github.com/kybik0606/AstroProv" target="_blank" class="github-btn">
 										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub
