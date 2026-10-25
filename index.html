@@ -237,25 +237,51 @@
 							<p>4th-year student at the Faculty of Radiophysics and Computer Technologies, Belarusian State University (BSU), majoring in Cybersecurity. Throughout my studies I have built a solid theoretical foundation in IT and information security. 
 							Key knowledge and skills: understanding of the core principles of information security (confidentiality, integrity, availability). Knowledge of operating system architecture and computer network design. Basic skills in network modelling with Cisco Packet Tracer.</p>
 
-							<!-- Блок про дипломный проект -->
+							<!-- Карточка проекта -->
 							<div style="margin-top: 2em; padding: 1.5em; background: rgba(0, 0, 0, 0.03); border-radius: 8px; border-left: 4px solid #444;">
-								<h3 style="margin-top: 0; padding-bottom: 0.5em;">Graduation Project</h3>
-								<p>
-									I am currently working on <strong>AstroProv</strong> - a lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
+								<h3 style="margin-top: 0; padding-bottom: 0.5em; text-align: center;">Graduation Project: AstroProv</h3>
+								<p style="text-align: center;">
+									A lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
 								</p>
 								
-								<!-- Бейджи технологий -->
-								<div style="margin: 1.5em 0; display: flex; gap: 8px; flex-wrap: wrap;">
-									<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-									<img src="https://img.shields.io/badge/SHA--256-4B0082?style=for-the-badge&logo=letsencrypt&logoColor=white" alt="SHA-256" />
-									<img src="https://img.shields.io/badge/Ed25519-00599C?style=for-the-badge&logo=securityscorecard&logoColor=white" alt="Ed25519" />
-									<img src="https://img.shields.io/badge/FITS-FF6F00?style=for-the-badge&logo=databricks&logoColor=white" alt="FITS Data" />
+								<!-- Окно терминала (Linux стиль) -->
+								<div style="background: #0c0c0c; border-radius: 6px; margin: 1.5em auto; box-shadow: 0 4px 12px rgba(0,0,0,0.4); overflow: hidden; font-family: 'Courier New', monospace; max-width: 650px; text-align: left; border: 1px solid #333;">
+									
+									<!-- Шапка окна (Linux-стиль) -->
+									<div style="background: #2d2d2d; padding: 8px 12px; display: flex; align-items: center; border-bottom: 1px solid #111;">
+										<i class="icon solid fa-terminal" style="color: #888; font-size: 0.9em; margin-right: 10px;"></i>
+										<span style="color: #888; font-size: 0.8em; font-family: sans-serif;">aliaksei@astroprov: ~</span>
+									</div>
+									
+									<!-- Контент -->
+									<div style="padding: 15px; color: #d4d4d4; font-size: 0.85em; line-height: 1.6;">
+										<!-- Linux Prompt -->
+										<div style="margin-bottom: 12px;">
+											<span style="color: #4af626; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #569cd6; font-weight: bold;">~</span>$ astroprov --tech-stack
+										</div>
+										
+										<!-- Вывод технологий -->
+										<div style="margin-bottom: 8px;">
+											<span style="color: #ce9178;">[Language]</span> &nbsp;Python 3.10+<br>
+											<span style="color: #ce9178;">[Crypto]</span> &nbsp;&nbsp;&nbsp;Ed25519 Digital Signatures<br>
+											<span style="color: #ce9178;">[Hashing]</span> &nbsp;&nbsp;SHA-256 & Merkle Trees<br>
+											<span style="color: #ce9178;">[Data]</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FITS (Flexible Image Transport System)
+										</div>
+										
+										<!-- Статус -->
+										<div style="color: #4af626; margin-top: 10px;">[✓] Core security modules initialized successfully.</div>
+										
+										<!-- Пустая строка и новый prompt (для завершенности) -->
+										<div style="margin-top: 15px;">
+											<span style="color: #4af626; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #569cd6; font-weight: bold;">~</span>$ <span style="animation: blink 1s step-end infinite;">_</span>
+										</div>
+									</div>
 								</div>
 
 								<!-- Ссылка на GitHub -->
-								<div style="margin-top: 1em;">
+								<div style="margin-top: 1.5em; text-align: center;">
 									<a href="https://github.com/kybik0606/AstroProv" target="_blank" style="font-weight: 600; text-decoration: none;">
-										<i class="icon brands fa-github"></i> View AstroProv on GitHub &rarr;
+										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub &rarr;
 									</a>
 								</div>
 							</div>
