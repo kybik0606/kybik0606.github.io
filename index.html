@@ -240,47 +240,49 @@
 							<!-- Карточка проекта -->
 							<div style="margin-top: 2em; padding: 1.5em; background: rgba(0, 0, 0, 0.03); border-radius: 8px; border-left: 4px solid #444;">
 								<h3 style="margin-top: 0; padding-bottom: 0.5em; text-align: center;">Graduation Project: AstroProv</h3>
-								<p style="text-align: center;">
+								
+								<!-- Уменьшили размер шрифта описания -->
+								<p style="text-align: center; font-size: 0.9em; line-height: 1.5;">
 									A lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
 								</p>
 								
-								<!-- Окно терминала (Linux стиль) -->
-								<div style="background: #0c0c0c; border-radius: 6px; margin: 1.5em auto; box-shadow: 0 4px 12px rgba(0,0,0,0.4); overflow: hidden; font-family: 'Courier New', monospace; max-width: 650px; text-align: left; border: 1px solid #333;">
+								<!-- Окно терминала (Светлая тема, компактное) -->
+								<div style="background: #ffffff; border-radius: 6px; margin: 1.2em auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; font-family: 'Courier New', monospace; max-width: 480px; text-align: left; border: 1px solid #eaeaea;">
 									
-									<!-- Шапка окна (Linux-стиль) -->
-									<div style="background: #2d2d2d; padding: 8px 12px; display: flex; align-items: center; border-bottom: 1px solid #111;">
-										<i class="icon solid fa-terminal" style="color: #888; font-size: 0.9em; margin-right: 10px;"></i>
-										<span style="color: #888; font-size: 0.8em; font-family: sans-serif;">aliaksei@astroprov: ~</span>
+									<!-- Шапка окна -->
+									<div style="background: #f8f9fa; padding: 6px 12px; display: flex; align-items: center; border-bottom: 1px solid #eaeaea;">
+										<i class="icon solid fa-terminal" style="color: #adb5bd; font-size: 0.8em; margin-right: 8px;"></i>
+										<span style="color: #6c757d; font-size: 0.75em; font-family: sans-serif;">aliaksei@astroprov: ~</span>
 									</div>
 									
-									<!-- Контент -->
-									<div style="padding: 15px; color: #d4d4d4; font-size: 0.85em; line-height: 1.6;">
+									<!-- Контент (уменьшен шрифт) -->
+									<div style="padding: 12px 15px; color: #333333; font-size: 0.75em; line-height: 1.5;">
 										<!-- Linux Prompt -->
-										<div style="margin-bottom: 12px;">
-											<span style="color: #4af626; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #569cd6; font-weight: bold;">~</span>$ astroprov --tech-stack
+										<div style="margin-bottom: 10px;">
+											<span style="color: #28a745; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #0056b3; font-weight: bold;">~</span>$ astroprov --tech-stack
 										</div>
 										
 										<!-- Вывод технологий -->
 										<div style="margin-bottom: 8px;">
-											<span style="color: #ce9178;">[Language]</span> &nbsp;Python 3.10+<br>
-											<span style="color: #ce9178;">[Crypto]</span> &nbsp;&nbsp;&nbsp;Ed25519 Digital Signatures<br>
-											<span style="color: #ce9178;">[Hashing]</span> &nbsp;&nbsp;SHA-256 & Merkle Trees<br>
-											<span style="color: #ce9178;">[Data]</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FITS (Flexible Image Transport System)
+											<span style="color: #d73a49;">[Language]</span> &nbsp;Python 3.10+<br>
+											<span style="color: #d73a49;">[Crypto]</span> &nbsp;&nbsp;&nbsp;Ed25519 Digital Signatures<br>
+											<span style="color: #d73a49;">[Hashing]</span> &nbsp;&nbsp;SHA-256 & Merkle Trees<br>
+											<span style="color: #d73a49;">[Data]</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FITS (Flexible Image Transport System)
 										</div>
 										
 										<!-- Статус -->
-										<div style="color: #4af626; margin-top: 10px;">[✓] Core security modules initialized successfully.</div>
+										<div style="color: #28a745; margin-top: 10px;">[✓] Core security modules initialized successfully.</div>
 										
-										<!-- Пустая строка и новый prompt (для завершенности) -->
+										<!-- Финальный prompt -->
 										<div style="margin-top: 15px;">
-											<span style="color: #4af626; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #569cd6; font-weight: bold;">~</span>$ <span style="animation: blink 1s step-end infinite;">_</span>
+											<span style="color: #28a745; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #0056b3; font-weight: bold;">~</span>$ <span style="animation: blink 1s step-end infinite;">_</span>
 										</div>
 									</div>
 								</div>
 
 								<!-- Ссылка на GitHub -->
-								<div style="margin-top: 1.5em; text-align: center;">
-									<a href="https://github.com/kybik0606/AstroProv" target="_blank" style="font-weight: 600; text-decoration: none;">
+								<div style="margin-top: 1em; text-align: center;">
+									<a href="https://github.com/kybik0606/AstroProv" target="_blank" style="font-weight: 600; text-decoration: none; font-size: 0.95em;">
 										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub &rarr;
 									</a>
 								</div>
