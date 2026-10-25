@@ -237,7 +237,7 @@
 							<p>4th-year student at the Faculty of Radiophysics and Computer Technologies, Belarusian State University (BSU), majoring in Cybersecurity. Throughout my studies I have built a solid theoretical foundation in IT and information security. 
 							Key knowledge and skills: understanding of the core principles of information security (confidentiality, integrity, availability). Knowledge of operating system architecture and computer network design. Basic skills in network modelling with Cisco Packet Tracer.</p>
 
-							<!-- Карточка проекта (убрана темная рамка слева) -->
+							<!-- Карточка проекта -->
 							<div style="margin-top: 2em; padding: 1.5em; background: rgba(0, 0, 0, 0.02); border-radius: 8px;">
 								<h3 style="margin-top: 0; padding-bottom: 0.5em; text-align: center;">Graduation Project: AstroProv</h3>
 								
@@ -245,19 +245,19 @@
 									A lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
 								</p>
 								
-								<!-- Окно терминала (расширено, шрифт уменьшен) -->
+								<!-- Окно терминала -->
 								<div style="background: #ffffff; border-radius: 6px; margin: 1.5em auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; font-family: 'Courier New', monospace; max-width: 600px; text-align: left; border: 1px solid #eaeaea;">
 									
-									<!-- Шапка окна -->
-									<div style="background: #f8f9fa; padding: 6px 12px; display: flex; align-items: center; border-bottom: 1px solid #eaeaea;">
+									<!-- Шапка окна (текст сделан жирным и чуть темнее) -->
+									<div style="background: #f8f9fa; padding: 8px 12px; display: flex; align-items: center; border-bottom: 1px solid #eaeaea;">
 										<i class="icon solid fa-terminal" style="color: #adb5bd; font-size: 0.8em; margin-right: 8px;"></i>
-										<span style="color: #6c757d; font-size: 0.75em; font-family: sans-serif;">aliaksei@astroprov: ~</span>
+										<span style="color: #495057; font-size: 0.75em; font-family: sans-serif; font-weight: bold;">aliaksei@astroprov: ~</span>
 									</div>
 									
-									<!-- Контент (шрифт 0.7em) -->
+									<!-- Контент -->
 									<div style="padding: 12px 15px; color: #333333; font-size: 0.7em; line-height: 1.5;">
 										
-										<!-- Linux Prompt (white-space: nowrap запрещает перенос строки) -->
+										<!-- Linux Prompt -->
 										<div style="margin-bottom: 10px; white-space: nowrap;">
 											<span style="color: #28a745; font-weight: bold;">aliaksei@astroprov</span>:<span style="color: #0056b3; font-weight: bold;">~</span>$ astroprov --tech-stack
 										</div>
@@ -280,10 +280,34 @@
 									</div>
 								</div>
 
-								<!-- Ссылка на GitHub -->
-								<div style="margin-top: 1em; text-align: center;">
-									<a href="https://github.com/kybik0606/AstroProv" target="_blank" style="font-weight: 600; text-decoration: none; font-size: 0.95em;">
-										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub &rarr;
+								<!-- Ссылка на GitHub в виде стильной кнопки -->
+								<style>
+									.github-btn {
+										display: inline-flex;
+										align-items: center;
+										gap: 10px;
+										padding: 0.8em 1.5em;
+										background-color: #24292e;
+										color: #ffffff !important;
+										border-radius: 6px;
+										text-decoration: none;
+										font-weight: 600;
+										font-size: 0.9em;
+										transition: background-color 0.2s ease, transform 0.2s ease;
+										box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+									}
+									.github-btn:hover {
+										background-color: #4b535a;
+										transform: translateY(-2px);
+									}
+									.github-btn i {
+										font-size: 1.2em;
+									}
+								</style>
+								
+								<div style="margin-top: 1.5em; text-align: center;">
+									<a href="https://github.com/kybik0606/AstroProv" target="_blank" class="github-btn">
+										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub
 									</a>
 								</div>
 							</div>
