@@ -253,3 +253,13 @@ p{margin:0 0 1.1em}
   .js .reveal{opacity:1;transform:none;transition:none}
   *{transition-duration:.01ms !important}
 }
+
+/* ===== Starfield ===== */
+#starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Лежит поверх фона, но под текстом */
+  pointer-events: none; /* Не мешает кликать по ссылкам */
+}

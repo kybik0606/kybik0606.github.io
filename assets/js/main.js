@@ -67,4 +67,152 @@
       revealer.observe(el);
     });
   }
+
+  /* --- Interactive Starfield (Active Version) --- */
+  var canvas = document.getElementById('starfield');
+  if (canvas) {
+    var ctx = canvas.getContext('2d');
+    var stars = [];
+    var shootingStars = [];
+    var mouse = { x: -1000, y: -1000 };
+    
+    // Настройки (можно менять)
+    var STAR_DENSITY = 6000; // Меньше число = больше звезд (было 4000)
+    var CONNECTION_DIST = 100; // Дистанция соединения линиями
+    var MOUSE_RADIUS = 150; // Радиус влияния мыши
+    
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      var numStars = Math.min(400, Math.floor((canvas.width * canvas.height) / STAR_DENSITY));
+      for (var i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.5 + 0.5,
+          vx: (Math.random() - 0.5) * 0.4, // Скорость движения по X (увеличена)
+          vy: (Math.random() - 0.5) * 0.4, // Скорость движения по Y (увеличена)
+          alpha: Math.random(),
+          twinkleSpeed: Math.random() * 0.03 + 0.01
+        });
+      }
+    }
+
+    // Создание падающей звезды
+    function createShootingStar() {
+      shootingStars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - 200,
+        len: Math.random() * 80 + 50,
+        speed: Math.random() * 8 + 6,
+        alpha: 1,
+        angle: Math.PI / 4 // Летят по диагонали
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Рисуем линии между близкими звездами
+      for (var i = 0; i < stars.length; i++) {
+        for (var j = i + 1; j < stars.length; j++) {
+          var dx = stars[i].x - stars[j].x;
+          var dy = stars[i].y - stars[j].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < CONNECTION_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(stars[i].x, stars[i].y);
+            ctx.lineTo(stars[j].x, stars[j].y);
+            // Линии зеленоватые в тон вашего дизайна
+            ctx.strokeStyle = 'rgba(34, 197, 94, ' + (1 - dist / CONNECTION_DIST) * 0.3 + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Двигаем и рисуем обычные звезды
+      stars.forEach(function(star) {
+        star.x += star.vx;
+        star.y += star.vy;
+
+        star.alpha += star.twinkleSpeed;
+        if (star.alpha > 1 || star.alpha < 0) star.twinkleSpeed *= -1;
+
+        // Взаимодействие с мышкой (отталкивание)
+        var dx = mouse.x - star.x;
+        var dy = mouse.y - star.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS) {
+          // Чем ближе мышка, тем сильнее отталкивает
+          var force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+          star.x -= dx * force * 0.05;
+          star.y -= dy * force * 0.05;
+        }
+
+        // Зацикливание
+        if (star.x < 0) star.x = canvas.width;
+        if (star.x > canvas.width) star.x = 0;
+        if (star.y < 0) star.y = canvas.height;
+        if (star.y > canvas.height) star.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + Math.abs(star.alpha) + ')';
+        ctx.fill();
+      });
+
+      // Рисуем падающие звезды
+      if (Math.random() < 0.005 && shootingStars.length < 3) { // Шанс появления
+        createShootingStar();
+      }
+      
+      shootingStars.forEach(function(sStar, index) {
+        sStar.x += Math.cos(sStar.angle) * sStar.speed;
+        sStar.y += Math.sin(sStar.angle) * sStar.speed;
+        sStar.alpha -= 0.01; // Затухание
+
+        if (sStar.alpha <= 0 || sStar.x > canvas.width || sStar.y > canvas.height) {
+          shootingStars.splice(index, 1); // Удаляем улетевшую звезду
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(sStar.x, sStar.y);
+          ctx.lineTo(sStar.x - Math.cos(sStar.angle) * sStar.len, sStar.y - Math.sin(sStar.angle) * sStar.len);
+          ctx.strokeStyle = 'rgba(255, 255, 255, ' + sStar.alpha + ')';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+      });
+      
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    
+    window.addEventListener('touchmove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.touches[0].clientX - rect.left;
+      mouse.y = e.touches[0].clientY - rect.top;
+    }, { passive: true });
+    
+    window.addEventListener('mouseout', function() {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+    
+    resizeCanvas();
+    animate();
+  }
 })();
