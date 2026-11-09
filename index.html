@@ -1,329 +1,298 @@
-<!DOCTYPE HTML>
-<!--
-	Prologue by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Aliaksei Chernik</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aliaksei Chernik</title>
+<meta name="description" content="Amateur astrophotography from Belarus: deep-sky objects, planets, comets. Cybersecurity student at BSU." />
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
 
-		<!-- Header -->
-			<div id="header">
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="site-header">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true"></span>
+    Aliaksei Chernik
+  </a>
 
-				<div class="top">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+    <span></span><span></span><span></span>
+  </button>
 
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="images/avatar.JPG" alt="" /></span>
-							<h1 id="title">Aliaksei Chernik</h1>
-							<p>Amateur Astronomer</p>
-							<p>Cybersecurity Student</p>
-						</div>
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <a href="#top">Intro</a>
+    <a href="#astronomy">Astronomy</a>
+    <a href="#asteroid">Asteroid 186822</a>
+    <a href="#cyber">Cybersecurity</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-star">Astronomy</span></a></li>
-								<li><a href="#asteroid" id="asteroid-link"><span class="icon solid fa-meteor">Asteroid 186822</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-shield-alt">Cybersecurity</span></a></li>
-								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
-							</ul>
-						</nav>
+<main>
 
-				</div>
+  <!-- ================= HERO ================= -->
+  <section id="top" class="hero">
+    <div class="hero-inner">
+      <img class="hero-avatar" src="images/avatar.JPG" alt="Portrait of Aliaksei Chernik" width="96" height="96" />
+      <p class="hero-eyebrow">Amateur Astronomer · Cybersecurity Student</p>
+      <h1>Aliaksei Chernik</h1>
+      <p class="hero-text">
+        I photograph deep-sky objects, planets and comets from Belarus,   and study information security at Belarusian State University.
+      </p>
 
-				<div class="bottom">
+      <div class="socials">
+        <a class="social" href="https://t.me/chernik_astronomer" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/chernik_astronomer/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a class="social" href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a class="social" href="https://github.com/kybik0606" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social" href="mailto:chernikaliaksei2006@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
 
-					<!-- Social Icons -->
-						<ul class="icons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 10px;">
-							<li><a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
-							<li><a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="https://github.com/kybik0606" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="mailto:chernikaliaksei2006@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
+    <a class="scroll-cue" href="#astronomy" aria-label="Scroll to content">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </a>
+  </section>
 
-				</div>
+  <!-- ================= ASTRONOMY ================= -->
+  <section id="astronomy" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Gallery</span>
+        <h2>Astronomy</h2>
+      </div>
 
-			</div>
+      <div class="prose">
+        <p>
+          Amateur astrophotography from Belarus. Deep-sky objects, planets, comets and the Moon,
+          mostly shot with a Sky-Watcher 130PDS reflector. Below are some of my favourite captures.
+        </p>
+      </div>
 
-		<!-- Main -->
-			<div id="main">
+      <div class="gallery" style="margin-top:2rem">
 
-				<!-- Intro -->
-					<section id="top" class="one dark cover" style="
-					background-image: url('images/r_stack_stacked_wo_starnet.jpg');
-					background-size: cover;
-					background-position: center center;
-					background-repeat: no-repeat;
-					min-height: 100vh;
-					">
-						<div class="container">
+        <figure class="shot">
+          <a href="images/M101_r.jpg"><img src="images/M101_r.jpg" alt="M 101, the Pinwheel Galaxy" loading="lazy" decoding="async"></a>
+          <figcaption><h3>M 101 — Pinwheel Galaxy</h3></figcaption>
+        </figure>
 
-							<header>
-								<h2 class="alt">Hi! I'm <strong>Aliaksei Chernik</strong>,<br />
-								amateur astronomer and cybersecurity student.</h2>
-								<p>I photograph deep-sky objects, planets and comets, and study information security.</p>
-							</header>
+        <figure class="shot">
+          <a href="images/NGC5907.jpg"><img src="images/NGC5907.jpg" alt="NGC 5907, the Knife Edge Galaxy" loading="lazy" decoding="async"></a>
+          <figcaption><h3>NGC 5907 — Knife Edge Galaxy</h3></figcaption>
+        </figure>
 
-							<!-- Исправленный блок ссылок -->
-							<footer style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 25px; margin-top: 1.5em;">
-								<a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram" style="white-space: nowrap;"> Telegram</a>
-								<a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram" style="white-space: nowrap;"> Instagram</a>
-								<a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin" style="white-space: nowrap;"> LinkedIn</a>
-								<a href="https://github.com/kybik0606" class="icon brands fa-github" style="white-space: nowrap;"> GitHub</a>
-								<a href="mailto:chernikaliaksei2006@gmail.com" class="icon fa-envelope" style="white-space: nowrap;"> E-mail</a>
-							</footer>
+        <figure class="shot">
+          <a href="images/M82_r.jpg"><img src="images/M82_r.jpg" alt="M 82, the Cigar Galaxy" loading="lazy" decoding="async"></a>
+          <figcaption><h3>M 82 — Cigar Galaxy</h3></figcaption>
+        </figure>
 
-						</div>
-					</section>
+        <figure class="shot">
+          <a href="images/sn_2026sqf.jpg"><img src="images/sn_2026sqf.jpg" alt="Supernova SN 2026sqf in NGC 3310" loading="lazy" decoding="async"></a>
+          <figcaption><h3>SN 2026sqf in NGC 3310</h3></figcaption>
+        </figure>
 
-				<!-- Astronomy -->
-					<section id="portfolio" class="two">
-						<div class="container">
+        <figure class="shot">
+          <a href="images/jupiter_020526_r.jpg"><img src="images/jupiter_020526_r.jpg" alt="Jupiter" loading="lazy" decoding="async"></a>
+          <figcaption><h3>Jupiter</h3></figcaption>
+        </figure>
 
-							<header>
-								<h2>Astronomy</h2>
-							</header>
+        <figure class="shot">
+          <a href="images/sun_120826_r.jpg"><img src="images/sun_120826_r.jpg" alt="The Sun" loading="lazy" decoding="async"></a>
+          <figcaption><h3>Sun</h3></figcaption>
+        </figure>
 
-							<p>Amateur astrophotography from Belarus. Deep-sky objects, planets, comets and the Moon,
-							mostly shot with a Sky-Watcher 130PDS reflector. Below are some of my favourite captures.</p>
+        <figure class="shot">
+          <a href="images/moon_eclipse.jpg"><img src="images/moon_eclipse.jpg" alt="Lunar eclipse" loading="lazy" decoding="async"></a>
+          <figcaption>
+            <h3>Lunar Eclipse</h3>
+            <p class="meta">2025.09.07 · Sky-Watcher 130PDS · ZWO 585MC</p>
+          </figcaption>
+        </figure>
 
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="images/M101_r.jpg" class="image fit"><img src="images/M101_r.jpg" alt="M 101" /></a>
-										<header>
-											<h4>M 101 - Pinwheel Galaxy</h4>
-										</header>
-									</article>		
-									<article class="item">
-										<a href="images/NGC5907.jpg" class="image fit"><img src="images/NGC5907.jpg" alt="NGC 5906" /></a>
-										<header>
-											<h4>NGC 5907 - Knife Edge Galaxy</h4>
-										</header>
-									</article>
-									<article class="item">
-										<a href="images/M82_r.jpg" class="image fit"><img src="images/M82_r.jpg" alt="M 82 - Cigar Galaxy" /></a>
-										<header>
-											<h4>M 82 - Cigar Galaxy</h4>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="images/SN 2026sqf.jpg" class="image fit"><img src="images/SN 2026sqf.jpg" alt="SN 2026sqf in NGC 3310" /></a>
-										<header>
-											<h4>SN 2026sqf in NGC 3310</h4>
-										</header>
-									</article>
-									<article class="item">
-										<a href="images/Юпитер020526_r.jpg" class="image fit"><img src="images/Юпитер020526_r.jpg" alt="Jupiter" /></a>
-										<header>
-											<h4>Jupiter</h4>
-										</header>
-									</article>
-									<article class="item">
-										<a href="images/Солнце120826_r.jpg" class="image fit"><img src="images/Солнце120826_r.jpg" alt="Sun" /></a>
-										<header>
-											<h4>Sun</h4>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="images/moon_eclipse.jpg" class="image fit"><img src="images/moon_eclipse.jpg" alt="Lunar Eclipse" /></a>
-										<header>
-											<h4>Lunar Eclipse</h4>
-											<h3>2025.09.07 | Sky-Watcher 130PDS | ZWO 585MC</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="images/c2023_GraXpert.jpg" class="image fit"><img src="images/c2023_GraXpert.jpg" alt="Comet C/2023 A3 (Tsuchinshan-ATLAS)" /></a>
-										<header>
-											<h4>Comet C/2023 A3 (Tsuchinshan-ATLAS)</h4>
-											<h3>2024.10.18 | Sky-Watcher 130PDS | ZWO 585MC | 48.5 minutes (97 × 30 s)</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="images/M63_r.jpg" class="image fit"><img src="images/M63_r.jpg" alt="M 63 - Sunflower Galaxy" /></a>
-										<header>
-											<h4>M 63 - Sunflower Galaxy</h4>
-										</header>
-									</article>
-								</div>
-							</div>
+        <figure class="shot">
+          <a href="images/c2023_GraXpert.jpg"><img src="images/c2023_GraXpert.jpg" alt="Comet C/2023 A3 Tsuchinshan-ATLAS" loading="lazy" decoding="async"></a>
+          <figcaption>
+            <h3>Comet C/2023 A3 (Tsuchinshan-ATLAS)</h3>
+            <p class="meta">2024.10.18 · 130PDS · ZWO 585MC · 48.5 min (97 × 30 s)</p>
+          </figcaption>
+        </figure>
 
-							<p style="margin-top: 2em;">More photos are on my <a href="https://t.me/chernik_astronomer">Telegram</a> and <a href="https://www.instagram.com/chernik_astronomer/">Instagram</a>.</p>
+        <figure class="shot">
+          <a href="images/M63_r.jpg"><img src="images/M63_r.jpg" alt="M 63, the Sunflower Galaxy" loading="lazy" decoding="async"></a>
+          <figcaption><h3>M 63 — Sunflower Galaxy</h3></figcaption>
+        </figure>
 
-						</div>
-					</section>
+      </div>
 
-				<!-- Asteroid 186822 -->
-					<section id="asteroid" class="three">
-						<div class="container">
+      <p style="margin-top:2rem;color:var(--muted);font-size:.9rem">
+        More photos are on my
+        <a href="https://t.me/chernik_astronomer" target="_blank" rel="noopener">Telegram</a> and
+        <a href="https://www.instagram.com/chernik_astronomer/" target="_blank" rel="noopener">Instagram</a>.
+      </p>
+    </div>
+  </section>
 
-							<header>
-								<h2>Asteroid (186822) 2004 FE31</h2>
-							</header>
+  <!-- ================= ASTEROID ================= -->
+  <section id="asteroid" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Observation</span>
+        <h2>Asteroid (186822) 2004 FE31</h2>
+      </div>
 
-							<!-- Видео / анимация -->
-							<div style="margin-bottom: 2.5em;">
-								<video controls autoplay loop muted playsinline
-									style="width: 100%; max-width: 900px; display: block; margin: 0 auto; border-radius: 4px;">
-									<source src="videos/asteroid_186822_animation.mp4" type="video/mp4">
-									Ваш браузер не поддерживает видео.
-								</video>
-								<p style="text-align: center; margin-top: 0.8em; font-size: 0.9em;">
-									Animation of the movement of an asteroid in 2.4 hours
-								</p>
-							</div>
+      <div class="media-block">
+        <video controls autoplay loop muted playsinline>
+          <source src="videos/asteroid_186822_animation.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="caption">Animation of the asteroid's movement over 2.4 hours</p>
+      </div>
 
-							<!-- Фото -->
-							<div style="margin-bottom: 2.5em; text-align: center;">
-								<a href="images/asteroid_186822_annotated.jpg" class="image fit" style="max-width: 900px; display: inline-block;">
-									<img src="images/asteroid_186822_annotated.jpg" alt="Asteroid (186822) 2004 FE31" />
-								</a>
-							</div>
+      <div class="split">
+        <figure class="frame">
+          <a href="images/asteroid_186822_annotated.jpg">
+            <img src="images/asteroid_186822_annotated.jpg" alt="Annotated image of asteroid (186822) 2004 FE31" loading="lazy" decoding="async">
+          </a>
+        </figure>
 
-							<!-- Текст -->
-							<div style="max-width: 900px; margin: 0 auto;">
-								<p>
-									I came across this asteroid by chance - browsing predicted flyby lists
-									and plugging names into Stellarium. During the shoot I wasn't sure it
-									would even show up: wrong coordinates? Too faint? I was lucky to get
-									2.5 hours of clear sky that night. After a quick stack I saw no trail,
-									gave up, and moved on. Next morning, with a fresh head, I learned ASTAP
-									can detect asteroids in an image - and it showed the asteroid was there,
-									just invisible to the eye. Then I found out it can also stack on a
-									specific object's motion, and that's how this image was born.
-								</p>
-								<p>
-									It reminded me of the "Pale Blue Dot" - Voyager photographing Earth as
-									it left the Solar System. A similar feeling: this faint point is a lone
-									kilometer-sized rock that has orbited the Sun for billions of years,
-									and will keep orbiting for billions more. But that night, some of the
-									photons it reflected happened to hit my telescope's mirror, then my
-									camera sensor, knocking electrons out of silicon atoms - which, once
-									digitized, became this image. This cosmic traveler is sending us a
-									greeting. Space is closer than we think.
-								</p>
-							</div>
-						</div>
-					</section>
+        <div class="prose">
+          <p>
+            I came across this asteroid by chance — browsing predicted flyby lists and plugging
+            names into Stellarium. During the shoot I wasn't sure it would even show up: wrong
+            coordinates? Too faint? I was lucky to get 2.5 hours of clear sky that night. After a
+            quick stack I saw no trail, gave up, and moved on. Next morning, with a fresh head,
+            I learned ASTAP can detect asteroids in an image — and it showed the asteroid was
+            there, just invisible to the eye. Then I found out it can also stack on a specific
+            object's motion, and that's how this image was born.
+          </p>
+          <p>
+            It reminded me of the "Pale Blue Dot" — Voyager photographing Earth as it left the
+            Solar System. A similar feeling: this faint point is a lone kilometre-sized rock that
+            has orbited the Sun for billions of years, and will keep orbiting for billions more.
+            But that night, some of the photons it reflected happened to hit my telescope's mirror,
+            then my camera sensor, knocking electrons out of silicon atoms — which, once digitised,
+            became this image. This cosmic traveller is sending us a greeting. Space is closer
+            than we think.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-				<!-- Cybersecurity -->
-					<section id="about" class="four">
-						
-						<!-- Стили только для кнопки GitHub -->
-						<style>
-							.github-btn {
-								display: inline-flex;
-								align-items: center;
-								gap: 10px;
-								padding: 0.8em 1.5em;
-								background-color: #24292e;
-								color: #ffffff !important;
-								border-radius: 6px;
-								text-decoration: none;
-								font-weight: 600;
-								font-size: 0.9em;
-								transition: background-color 0.2s ease;
-								box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-							}
-							.github-btn:hover {
-								background-color: #4b535a;
-							}
-						</style>
+  <!-- ================= CYBERSECURITY ================= -->
+  <section id="cyber" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Studies</span>
+        <h2>Cybersecurity</h2>
+      </div>
 
-						<div class="container">
+      <div class="split">
+        <div class="prose">
+          <p>
+            4th-year student at the Faculty of Radiophysics and Computer Technologies,
+            Belarusian State University (BSU), majoring in Cybersecurity. Throughout my studies
+            I have built a solid theoretical foundation in IT and information security.
+          </p>
+          <p>
+            Key knowledge and skills: understanding of the core principles of information security
+            (confidentiality, integrity, availability); knowledge of operating system architecture
+            and computer network design; basic skills in network modelling with Cisco Packet Tracer.
+          </p>
+        </div>
 
-							<header>
-								<h2>Cybersecurity</h2>
-							</header>
+        <figure class="frame">
+          <img src="images/cyber.JPG" alt="Cybersecurity" loading="lazy" decoding="async">
+        </figure>
+      </div>
 
-							<a href="#" class="image featured" style="max-width: 300px; margin: 0 auto; display: block;">
-								<img src="images/cyber.JPG" alt="" />
-							</a>
+      <div class="card">
+        <h3>Graduation Project: AstroProv</h3>
+        <p style="color:#cfd5e3;max-width:70ch">
+          A lightweight Python framework that brings cryptographic security to astrophotography.
+          It guarantees the integrity, authenticity, and provenance of astronomical FITS data by
+          embedding a digitally signed "passport" directly into the file.
+        </p>
 
-							<p>4th-year student at the Faculty of Radiophysics and Computer Technologies, Belarusian State University (BSU), majoring in Cybersecurity. Throughout my studies I have built a solid theoretical foundation in IT and information security. 
-							Key knowledge and skills: understanding of the core principles of information security (confidentiality, integrity, availability). Knowledge of operating system architecture and computer network design. Basic skills in network modelling with Cisco Packet Tracer.</p>
+        <ul class="chips">
+          <li>Python</li>
+          <li>SHA-256</li>
+          <li>Ed25519</li>
+          <li>FITS</li>
+        </ul>
 
-							<!-- Карточка проекта -->
-							<div style="margin-top: 2em; padding: 1.5em; background: rgba(0, 0, 0, 0.02); border-radius: 8px;">
-								<h3 style="margin-top: 0; padding-bottom: 0.5em; text-align: center;">Graduation Project: AstroProv</h3>
-								
-								<p style="text-align: center; font-size: 0.9em; line-height: 1.5;">
-									A lightweight Python framework that brings cryptographic security to astrophotography. It guarantees the integrity, authenticity, and provenance of astronomical FITS data by embedding a digitally signed "passport" directly into the file.
-								</p>
-								
-								<!-- Плашки технологий (по центру, адаптивные) -->
-								<div style="margin: 1.5em 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-									<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-									<img src="https://img.shields.io/badge/SHA--256-4B0082?style=for-the-badge&logo=letsencrypt&logoColor=white" alt="SHA-256" />
-									<img src="https://img.shields.io/badge/Ed25519-00599C?style=for-the-badge&logo=securityscorecard&logoColor=white" alt="Ed25519" />
-									<img src="https://img.shields.io/badge/FITS-FF6F00?style=for-the-badge&logo=databricks&logoColor=white" alt="FITS Data" />
-								</div>
+        <a class="btn" href="https://github.com/kybik0606/AstroProv" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          Explore AstroProv on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
 
-								<!-- Ссылка на GitHub (кнопка без изменений) -->
-								<div style="margin-top: 1.5em; text-align: center;">
-									<a href="https://github.com/kybik0606/AstroProv" target="_blank" class="github-btn">
-										<i class="icon brands fa-github"></i> Explore AstroProv on GitHub
-									</a>
-								</div>
-							</div>
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="section-head" style="margin-inline:auto;text-align:center">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Contact</h2>
+      </div>
 
-						</div>
-					</section>
+      <div class="prose">
+        <p>
+          Best way to reach me is via Telegram or email.
+          I'm always happy to talk about astrophotography, or collaboration.
+        </p>
+      </div>
 
-				<!-- Contact -->
-					<section id="contact" class="three">
-						<div class="container">
+      <a class="btn" href="mailto:chernikaliaksei2006@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+        </svg>
+        chernikaliaksei2006@gmail.com
+      </a>
 
-							<header>
-								<h2>Contact</h2>
-							</header>
+      <div class="socials" style="margin-top:2.5rem">
+        <a class="social" href="https://t.me/chernik_astronomer" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/chernik_astronomer/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a class="social" href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a class="social" href="https://github.com/kybik0606" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-							<p>Best way to reach me is via Telegram or email. I'm always happy to talk about astrophotography, or collaboration.</p>
+</main>
 
-							<ul class="icons" style="justify-content: center; display: flex; flex-wrap: wrap; gap: 1.5em; font-size: 1.4em;">
-								<li><a href="https://t.me/chernik_astronomer" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
-								<li><a href="https://www.instagram.com/chernik_astronomer/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="https://www.linkedin.com/in/aliaksei-chernik-05a241339/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="https://github.com/kybik0606" class="icon brands fa-github"><span class="label">Github</span></a></li>
-								<li><a href="mailto:chernikaliaksei2006@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 Aliaksei Chernik. All rights reserved.</p>
+  </div>
+</footer>
 
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; 2026 Aliaksei Chernik. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+<script src="assets/js/main.js"></script>
+</body>
 </html>
