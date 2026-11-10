@@ -81,6 +81,8 @@
     var CONNECTION_DIST = 100; 
     var MOUSE_RADIUS = 150; 
     
+    var lastWidth = window.innerWidth;
+
     function resizeCanvas() {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
@@ -191,19 +193,28 @@
       requestAnimationFrame(animate);
     }
 
-    // ТОЛЬКО МЫШКА (без touchmove, чтобы не ломать скролл на телефоне)
-    window.addEventListener('mousemove', function(e) {
-      var rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-    
-    window.addEventListener('mouseout', function() {
-      mouse.x = -1000;
-      mouse.y = -1000;
-    });
+    // ВКЛЮЧАЕМ МЫШКУ ТОЛЬКО НА КОМПЬЮТЕРАХ
+    var hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (hasHover) {
+      window.addEventListener('mousemove', function(e) {
+        var rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      
+      window.addEventListener('mouseout', function() {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      });
+    }
 
-    window.addEventListener('resize', resizeCanvas);
+    // Обновляем холст только если изменилась ШИРИНА (игнорируем скрытие адресной строки)
+    window.addEventListener('resize', function() {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        resizeCanvas();
+      }
+    });
     
     resizeCanvas();
     animate();
