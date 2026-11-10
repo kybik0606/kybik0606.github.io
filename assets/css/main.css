@@ -264,50 +264,71 @@ p{margin:0 0 1.1em}
   pointer-events: none; /* Не мешает кликать по ссылкам */
 }
 
-/* ===== Saturn ASCII widget (в #contact) ===== */
-#contact { position: relative; }
+/* ===== Planets Widgets (в #contact) ===== */
+#contact {
+  position: relative;
+  isolation: isolate; /* создаёт контекст наложения для z-index */
+  overflow: hidden;
+  min-height: 700px; /* вертикальный запас для крупных планет */
+}
+
+#contact .container {
+  position: relative;
+  z-index: 1; /* контент поверх планет */
+}
+
+.planet-widget {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0; /* под контентом */
+  opacity: .6;
+  filter: drop-shadow(0 0 20px rgba(34, 197, 94, .3));
+  animation: planet-fade-in 1.4s ease both;
+}
 
 .saturn-widget {
-  position: absolute;
-  top: clamp(2rem, 5vw, 4rem);
-  right: clamp(1.5rem, 4vw, 3rem);
-  pointer-events: none;      /* не мешает кликам */
-  user-select: none;
-  z-index: -1;               /* рисуется за контентом секции */
-  opacity: .55;              /* мягко, чтобы текст читался */
-  filter: drop-shadow(0 0 16px rgba(34, 197, 94, .3));
-  animation: saturn-fade-in 1.4s ease both;
+  left: clamp(1.5rem, 5vw, 5rem);
 }
 
-@keyframes saturn-fade-in {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: .55; transform: none; }
+.jupiter-widget {
+  right: clamp(1.5rem, 5vw, 5rem);
+  filter: drop-shadow(0 0 20px rgba(245, 194, 107, .3));
 }
 
-.saturn-screen {
+.planet-screen {
   margin: 0;
   padding: 0;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: clamp(7px, 0.8vw, 10px);
-  line-height: 1.2;          /* 2×ширина символа → квадратные «пиксели» */
+  font-size: clamp(7px, 0.9vw, 11px);
+  line-height: 1.2; /* 2×ширина символа → квадратные «пиксели» */
   letter-spacing: 0;
-  color: var(--accent);      /* зелёный из вашей палитры */
-  text-shadow: 0 0 5px rgba(34, 197, 94, .5);
   white-space: pre;
   tab-size: 0;
 }
 
-/* Даём секции вертикальный запас, чтобы большой Сатурн помещался целиком */
-@media (min-width: 1100px) {
-  #contact { min-height: 580px; }
+.saturn-screen {
+  color: var(--accent); /* зелёный */
+  text-shadow: 0 0 6px rgba(34, 197, 94, .5);
 }
 
-/* На узких экранах скрываем, чтобы не наезжать на заголовок Contact */
-@media (max-width: 1099px) {
-  .saturn-widget { display: none; }
+.jupiter-screen {
+  color: #f5c26b; /* жёлто-оранжевый для Юпитера */
+  text-shadow: 0 0 6px rgba(245, 194, 107, .5);
 }
 
-/* Уважаем предпочтения пользователя */
+@keyframes planet-fade-in {
+  from { opacity: 0; transform: translateY(-50%) scale(0.9); }
+  to   { opacity: .6; transform: translateY(-50%) scale(1); }
+}
+
+/* Скрываем планеты на средних и узких экранах, чтобы не наезжать на текст */
+@media (max-width: 1400px) {
+  .planet-widget { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .saturn-widget { animation: none; }
+  .planet-widget { animation: none; }
 }

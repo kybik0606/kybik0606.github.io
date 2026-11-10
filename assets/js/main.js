@@ -242,8 +242,7 @@
 })();
 
 /* =========================================================
-   Saturn ASCII widget — декоративная анимация в #contact
-   Порт C-версии raycaster'а. Не трогает глобальные объекты.
+   SATURN ASCII widget — декоративная анимация (слева в #contact)
    ========================================================= */
 (function () {
   'use strict';
@@ -264,7 +263,7 @@
     return;
   }
 
-  /* ---- Параметры сцены (увеличены в ~1.75× по сравнению с прошлой версией) ---- */
+  /* ---- Параметры сцены (увеличены) ---- */
   var W = 56, H = 28;
   var shades  = " .:-=+*#%@";
   var NSHADE  = shades.length;
@@ -397,6 +396,153 @@
       lastTime = 0;
       requestAnimationFrame(render);
     }
+  });
+
+  requestAnimationFrame(render);
+})();
+
+/* =========================================================
+   JUPITER ASCII widget — декоративная анимация (справа в #contact)
+   ========================================================= */
+(function () {
+  'use strict';
+
+  var pre = document.querySelector('.jupiter-screen');
+  if (!pre) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    pre.textContent =
+      "        .-\"\"\"\"\"-.        \n" +
+      "      .'  .-\"\"\"-.  '.    \n" +
+      "     /   /  (o)  \\   \\   \n" +
+      "    |   |    \"    |   |  \n" +
+      "     \\   \\       /   /   \n" +
+      "      '.  '-...-'  .'    \n" +
+      "        '-.....-'        ";
+    return;
+  }
+
+  var W = 56, H = 28;
+  var shades  = " .:-=+*#%@";
+  var NSHADE  = shades.length;
+
+  var tilt = 0.25; /* наклон оси Юпитера меньше */
+  var ct = Math.cos(tilt), st = Math.sin(tilt);
+  var lx = -0.4, ly = 0.6, lz = 0.7;
+  var ll = Math.sqrt(lx*lx + ly*ly + lz*lz);
+  lx /= ll; ly /= ll; lz /= ll;
+
+  var scale = Math.min(W * 0.19, H * 0.70);
+  var angle = 0;
+
+  var ca = 0, sa = 0;
+
+  /* Параметры Большого Красного Пятна (в объектных координатах) */
+  var SPOT_LON = 0.0;
+  var SPOT_LAT = -0.4;
+  var SPOT_RAD = 0.25;
+
+  function traceRay(xv, yv) {
+    var Px = xv * ca + yv * st * sa;
+    var Py = yv * ct;
+    var Pz = xv * sa - yv * st * ca;
+    var Dx = -ct * sa;
+    var Dy =  st;
+    var Dz =  ct * ca;
+
+    var bestZ = -1e9;
+    var bright = 0;
+
+    var P2 = Px*Px + Py*Py + Pz*Pz;
+    if (P2 < 1) {
+      var zs = Math.sqrt(1 - P2);
+      bestZ = zs;
+      var ox = Px + zs * Dx;
+      var oy = Py + zs * Dy;
+      var oz = Pz + zs * Dz;
+
+      var nx =  ca * ox              + sa * oz;
+      var ny =  st * sa * ox + ct * oy - st * ca * oz;
+      var nz = -ct * sa * ox + st * oy + ct * ca * oz;
+
+      var diff = nx*lx + ny*ly + nz*lz;
+      if (diff < 0) diff = 0;
+      var base = 0.15 + 0.85 * diff;
+
+      /* Полосы по широте */
+      var band = 0.5 + 0.5 * Math.sin(oy * 18 + 0.5 * Math.sin(oy * 7));
+
+      /* Пятно: сдвигаем долготу вместе с вращением */
+      var lon_spot = SPOT_LON + angle;
+      var x_spot = Math.cos(SPOT_LAT) * Math.cos(lon_spot);
+      var y_spot = Math.sin(SPOT_LAT);
+      var z_spot = Math.cos(SPOT_LAT) * Math.sin(lon_spot);
+
+      var dot = ox * x_spot + oy * y_spot + oz * z_spot;
+      var dist = Math.acos(Math.max(-1, Math.min(1, dot)));
+
+      var spot_factor = 1.0;
+      if (dist < SPOT_RAD) {
+        spot_factor = 0.5; /* пятно темнее */
+      } else if (dist < SPOT_RAD * 1.5) {
+        spot_factor = 0.5 + 0.5 * ((dist - SPOT_RAD) / (SPOT_RAD * 0.5));
+      }
+
+      bright = base * (0.5 + 0.5 * band) * spot_factor;
+      if (bright > 1) bright = 1;
+      if (bright < 0.1) bright = 0.1;
+    }
+
+    return bright;
+  }
+
+  var running = true;
+  var visible = true;
+  var lastTime = 0;
+  var frameMs = 1000 / 24;
+
+  function render(now) {
+    if (!running) return;
+    if (!visible) { requestAnimationFrame(render); return; }
+    if (now - lastTime < frameMs) { requestAnimationFrame(render); return; }
+    lastTime = now;
+
+    ca = Math.cos(angle);
+    sa = Math.sin(angle);
+
+    var lines = new Array(H);
+    for (var py = 0; py < H; py++) {
+      var row = '';
+      for (var px = 0; px < W; px++) {
+        var fx = px + 0.5;
+        var fy = py + 0.5;
+        var xv = (fx - W * 0.5) / scale;
+        var yv = (H * 0.5 - fy) * 2 / scale;
+        var b = traceRay(xv, yv);
+        var idx = Math.round(b * (NSHADE - 1));
+        if (idx < 0) idx = 0;
+        else if (idx >= NSHADE) idx = NSHADE - 1;
+        row += shades.charAt(idx);
+      }
+      lines[py] = row;
+    }
+    pre.textContent = lines.join('\n');
+
+    angle += 0.03;
+    if (angle > Math.PI * 2) angle -= Math.PI * 2;
+
+    requestAnimationFrame(render);
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible = e.isIntersecting; });
+    }, { threshold: 0 }).observe(pre);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { running = false; }
+    else if (!running) { running = true; lastTime = 0; requestAnimationFrame(render); }
   });
 
   requestAnimationFrame(render);
