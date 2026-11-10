@@ -68,7 +68,7 @@
     });
   }
 
-  /* --- Interactive Starfield (Active Version) --- */
+  /* --- Interactive Starfield --- */
   var canvas = document.getElementById('starfield');
   if (canvas) {
     var ctx = canvas.getContext('2d');
@@ -76,12 +76,15 @@
     var shootingStars = [];
     var mouse = { x: -1000, y: -1000 };
     
-    // Настройки (можно менять)
     var STAR_DENSITY = 6000; 
     var CONNECTION_DIST = 100; 
     var MOUSE_RADIUS = 150; 
     
     var lastWidth = window.innerWidth;
+    var lastTime = 0;
+    
+    // Проверяем наличие настоящей мыши (компьютеры и ноутбуки)
+    var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     function resizeCanvas() {
       canvas.width = canvas.offsetWidth;
@@ -105,7 +108,6 @@
       }
     }
 
-    // Создание падающей звезды
     function createShootingStar() {
       shootingStars.push({
         x: Math.random() * canvas.width,
@@ -117,10 +119,22 @@
       });
     }
 
-    function animate() {
+    function animate(currentTime) {
+      requestAnimationFrame(animate);
+      
+      // ДЕЛЬТА-ВРЕМЯ: делает движение плавным при любой частоте кадров
+      if (!lastTime) lastTime = currentTime;
+      var dt = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+      
+      // Ограничитель: если вкладка «спала» 5 секунд, не даём звездам скакнуть
+      if (dt > 0.1) dt = 0.1;
+      
+      var mult = dt * 60; // Множитель скорости (1 при 60 FPS)
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Рисуем линии между близкими звездами
+      // Рисуем линии между звездами
       for (var i = 0; i < stars.length; i++) {
         for (var j = i + 1; j < stars.length; j++) {
           var dx = stars[i].x - stars[j].x;
@@ -138,22 +152,22 @@
         }
       }
 
-      // Двигаем и рисуем обычные звезды
+      // Двигаем и рисуем звезды
       stars.forEach(function(star) {
-        star.x += star.vx;
-        star.y += star.vy;
+        star.x += star.vx * mult;
+        star.y += star.vy * mult;
 
-        star.alpha += star.twinkleSpeed;
+        star.alpha += star.twinkleSpeed * mult;
         if (star.alpha > 1 || star.alpha < 0) star.twinkleSpeed *= -1;
 
-        // Взаимодействие с мышкой (отталкивание)
+        // Отталкивание от мыши
         var dx = mouse.x - star.x;
         var dy = mouse.y - star.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MOUSE_RADIUS) {
+        if (dist < MOUSE_RADIUS && dist > 0) {
           var force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-          star.x -= dx * force * 0.05;
-          star.y -= dy * force * 0.05;
+          star.x -= dx * force * 0.05 * mult;
+          star.y -= dy * force * 0.05 * mult;
         }
 
         // Зацикливание
@@ -168,15 +182,15 @@
         ctx.fill();
       });
 
-      // Рисуем падающие звезды
-      if (Math.random() < 0.005 && shootingStars.length < 3) { 
+      // Падающие звезды
+      if (Math.random() < 0.005 * mult && shootingStars.length < 3) { 
         createShootingStar();
       }
       
       shootingStars.forEach(function(sStar, index) {
-        sStar.x += Math.cos(sStar.angle) * sStar.speed;
-        sStar.y += Math.sin(sStar.angle) * sStar.speed;
-        sStar.alpha -= 0.01; 
+        sStar.x += Math.cos(sStar.angle) * sStar.speed * mult;
+        sStar.y += Math.sin(sStar.angle) * sStar.speed * mult;
+        sStar.alpha -= 0.01 * mult; 
 
         if (sStar.alpha <= 0 || sStar.x > canvas.width || sStar.y > canvas.height) {
           shootingStars.splice(index, 1); 
@@ -189,26 +203,32 @@
           ctx.stroke();
         }
       });
-      
-      requestAnimationFrame(animate);
     }
 
-    // ВКЛЮЧАЕМ МЫШКУ ТОЛЬКО НА КОМПЬЮТЕРАХ
-    var hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (hasHover) {
-      window.addEventListener('mousemove', function(e) {
+    // МЫШКА: только для устройств с настоящей мышью
+    if (hasMouse) {
+      window.addEventListener('pointermove', function(e) {
+        if (e.pointerType !== 'mouse') return;
         var rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
-      });
+      }, { passive: true });
       
-      window.addEventListener('mouseout', function() {
+      window.addEventListener('pointerleave', function() {
         mouse.x = -1000;
         mouse.y = -1000;
       });
     }
 
-    // Обновляем холст только если изменилась ШИРИНА (игнорируем скрытие адресной строки)
+    // СБРОС при скролле (защита от «залипшей» мыши на мобилках)
+    window.addEventListener('scroll', function() {
+      if (!hasMouse) {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      }
+    }, { passive: true });
+
+    // Ресайз только при смене ШИРИНЫ (игнорируем скрытие адресной строки)
     window.addEventListener('resize', function() {
       if (window.innerWidth !== lastWidth) {
         lastWidth = window.innerWidth;
@@ -217,6 +237,6 @@
     });
     
     resizeCanvas();
-    animate();
+    requestAnimationFrame(animate);
   }
 })();
