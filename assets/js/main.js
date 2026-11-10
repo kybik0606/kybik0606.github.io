@@ -264,7 +264,7 @@
   }
 
   /* ---- Параметры сцены (увеличены) ---- */
-  var W = 56, H = 28;
+  var W = 72, H = 36;
   var shades  = " .:-=+*#%@";
   var NSHADE  = shades.length;
   var R_IN    = 1.30, R_OUT = 2.30;
@@ -422,7 +422,7 @@
     return;
   }
 
-  var W = 56, H = 28;
+  var W = 72, H = 36;
   var shades  = " .:-=+*#%@";
   var NSHADE  = shades.length;
 
@@ -437,10 +437,10 @@
 
   var ca = 0, sa = 0;
 
-  /* Параметры Большого Красного Пятна (в объектных координатах) */
-  var SPOT_LON = 0.0;
-  var SPOT_LAT = -0.4;
-  var SPOT_RAD = 0.25;
+  /* Параметры Большого Красного Пятна (фиксированы в пространстве объекта) */
+  var SPOT_LON = 1.5;  /* Начальная долгота */
+  var SPOT_LAT = -0.35; /* Широта (южное полушарие) */
+  var SPOT_RAD = 0.28; /* Угловой радиус пятна */
 
   function traceRay(xv, yv) {
     var Px = xv * ca + yv * st * sa;
@@ -472,8 +472,8 @@
       /* Полосы по широте */
       var band = 0.5 + 0.5 * Math.sin(oy * 18 + 0.5 * Math.sin(oy * 7));
 
-      /* Пятно: сдвигаем долготу вместе с вращением */
-      var lon_spot = SPOT_LON + angle;
+      /* Большое Красное Пятно — фиксировано на сфере */
+      var lon_spot = SPOT_LON;
       var x_spot = Math.cos(SPOT_LAT) * Math.cos(lon_spot);
       var y_spot = Math.sin(SPOT_LAT);
       var z_spot = Math.cos(SPOT_LAT) * Math.sin(lon_spot);
@@ -483,9 +483,9 @@
 
       var spot_factor = 1.0;
       if (dist < SPOT_RAD) {
-        spot_factor = 0.5; /* пятно темнее */
+        spot_factor = 0.2; /* пятно тёмное */
       } else if (dist < SPOT_RAD * 1.5) {
-        spot_factor = 0.5 + 0.5 * ((dist - SPOT_RAD) / (SPOT_RAD * 0.5));
+        spot_factor = 0.2 + 0.8 * ((dist - SPOT_RAD) / (SPOT_RAD * 0.5));
       }
 
       bright = base * (0.5 + 0.5 * band) * spot_factor;
@@ -528,7 +528,7 @@
     }
     pre.textContent = lines.join('\n');
 
-    angle += 0.03;
+    angle += 0.03; /* Скорость вращения */
     if (angle > Math.PI * 2) angle -= Math.PI * 2;
 
     requestAnimationFrame(render);
