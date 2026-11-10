@@ -242,7 +242,7 @@
 })();
 
 /* =========================================================
-   Saturn ASCII widget — декоративная анимация в углу #astronomy
+   Saturn ASCII widget — декоративная анимация в #contact
    Порт C-версии raycaster'а. Не трогает глобальные объекты.
    ========================================================= */
 (function () {
@@ -264,8 +264,8 @@
     return;
   }
 
-  /* ---- Параметры сцены (совпадают с C-версией) ---- */
-  var W = 32, H = 16;
+  /* ---- Параметры сцены (увеличены в ~1.75× по сравнению с прошлой версией) ---- */
+  var W = 56, H = 28;
   var shades  = " .:-=+*#%@";
   var NSHADE  = shades.length;
   var R_IN    = 1.30, R_OUT = 2.30;
@@ -339,7 +339,7 @@
   var running   = true;
   var visible   = true;
   var lastTime  = 0;
-  var frameMs   = 1000 / 24;   /* 24 FPS — для декоративного виджета хватает */
+  var frameMs   = 1000 / 24;
 
   function render(now) {
     if (!running) return;

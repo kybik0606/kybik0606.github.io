@@ -264,42 +264,46 @@ p{margin:0 0 1.1em}
   pointer-events: none; /* Не мешает кликать по ссылкам */
 }
 
-/* ===== Saturn ASCII widget (в углу #astronomy) ===== */
-#astronomy { position: relative; }
+/* ===== Saturn ASCII widget (в #contact) ===== */
+#contact { position: relative; }
 
 .saturn-widget {
   position: absolute;
-  top: clamp(1.5rem, 4vw, 3rem);
+  top: clamp(2rem, 5vw, 4rem);
   right: clamp(1.5rem, 4vw, 3rem);
-  pointer-events: none;   /* не мешает кликам/выделению */
+  pointer-events: none;      /* не мешает кликам */
   user-select: none;
-  z-index: 1;
-  opacity: .75;
-  filter: drop-shadow(0 0 14px rgba(34, 197, 94, .25));
-  /* Плавное появление при загрузке */
-  animation: saturn-fade-in 1.2s ease both;
+  z-index: -1;               /* рисуется за контентом секции */
+  opacity: .55;              /* мягко, чтобы текст читался */
+  filter: drop-shadow(0 0 16px rgba(34, 197, 94, .3));
+  animation: saturn-fade-in 1.4s ease both;
 }
 
 @keyframes saturn-fade-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: .75; transform: none; }
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: .55; transform: none; }
 }
 
 .saturn-screen {
   margin: 0;
   padding: 0;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 7px;
-  line-height: 8.4px;   /* 2×ширина символа → квадратные «пиксели» */
+  font-size: clamp(7px, 0.8vw, 10px);
+  line-height: 1.2;          /* 2×ширина символа → квадратные «пиксели» */
   letter-spacing: 0;
-  color: var(--accent);  /* зелёный из вашей палитры */
-  text-shadow: 0 0 4px rgba(34, 197, 94, .55);
+  color: var(--accent);      /* зелёный из вашей палитры */
+  text-shadow: 0 0 5px rgba(34, 197, 94, .5);
   white-space: pre;
   tab-size: 0;
 }
 
-/* Убираем на узких экранах, чтобы не наезжать на секционный заголовок */
-@media (max-width: 900px) {
+/* Даём секции вертикальный запас, чтобы большой Сатурн помещался целиком */
+@media (min-width: 1100px) {
+  #contact { min-height: 580px; }
+}
+
+/* На узких экранах скрываем, чтобы не наезжать на заголовок Contact */
+@media (max-width: 1099px) {
   .saturn-widget { display: none; }
 }
 
