@@ -240,3 +240,164 @@
     requestAnimationFrame(animate);
   }
 })();
+
+/* =========================================================
+   Saturn ASCII widget — декоративная анимация в углу #astronomy
+   Порт C-версии raycaster'а. Не трогает глобальные объекты.
+   ========================================================= */
+(function () {
+  'use strict';
+
+  var pre = document.querySelector('.saturn-screen');
+  if (!pre) return;
+
+  /* Если пользователь просит меньше анимации — рисуем один статичный кадр. */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    pre.textContent =
+      "        .-\"\"\"\"\"-.        \n" +
+      "      .'  .-\"\"\"-.  '.    \n" +
+      "     /   /  (o)  \\   \\   \n" +
+      "    |   |    \"    |   |  \n" +
+      "     \\   \\       /   /   \n" +
+      "      '.  '-...-'  .'    \n" +
+      "        '-.....-'        ";
+    return;
+  }
+
+  /* ---- Параметры сцены (совпадают с C-версией) ---- */
+  var W = 32, H = 16;
+  var shades  = " .:-=+*#%@";
+  var NSHADE  = shades.length;
+  var R_IN    = 1.30, R_OUT = 2.30;
+
+  var tilt = 0.42;
+  var ct = Math.cos(tilt), st = Math.sin(tilt);
+  var lx = -0.4, ly = 0.6, lz = 0.7;
+  var ll = Math.sqrt(lx*lx + ly*ly + lz*lz);
+  lx /= ll; ly /= ll; lz /= ll;
+
+  var scale = Math.min(W * 0.19, H * 0.70);
+  var angle = 0;
+
+  /* ---- Ray-caster (порт из C) ---- */
+  var ca = 0, sa = 0;
+
+  function traceRay(xv, yv) {
+    var Px = xv * ca + yv * st * sa;
+    var Py = yv * ct;
+    var Pz = xv * sa - yv * st * ca;
+    var Dx = -ct * sa;
+    var Dy =  st;
+    var Dz =  ct * ca;
+
+    var bestZ  = -1e9;
+    var bright = 0;
+
+    /* Сфера */
+    var P2 = Px*Px + Py*Py + Pz*Pz;
+    if (P2 < 1) {
+      var zs = Math.sqrt(1 - P2);
+      bestZ = zs;
+      var ox = Px + zs * Dx;
+      var oy = Py + zs * Dy;
+      var oz = Pz + zs * Dz;
+      var nx =  ca * ox              + sa * oz;
+      var ny =  st * sa * ox + ct * oy - st * ca * oz;
+      var nz = -ct * sa * ox + st * oy + ct * ca * oz;
+      var diff = nx*lx + ny*ly + nz*lz;
+      if (diff < 0) diff = 0;
+      var base = 0.15 + 0.85 * diff;
+      var band = 0.5 + 0.5 * Math.sin(oy * 10);
+      var lon  = 0.5 + 0.5 * Math.sin(Math.atan2(oz, ox) * 6 + oy * 5);
+      bright = base * (0.60 + 0.25 * band + 0.15 * lon);
+      if (bright > 1)    bright = 1;
+      if (bright < 0.12) bright = 0.12;
+    }
+
+    /* Кольца: плоскость y=0 */
+    if (Math.abs(Dy) > 1e-6) {
+      var zr = -Py / Dy;
+      var rx = Px + zr * Dx;
+      var rz = Pz + zr * Dz;
+      var r2 = rx*rx + rz*rz;
+      if (r2 >= R_IN*R_IN && r2 <= R_OUT*R_OUT && zr > bestZ) {
+        var r  = Math.sqrt(r2);
+        var rb = 0.70;
+        if (r > 1.85 && r < 1.95) rb = 0.10;   /* деление Кассини */
+        if (r < 1.38) rb = 0.30;
+        if (r > 2.25) rb = 0.40;
+        var ang = Math.atan2(rz, rx);
+        rb *= 0.90 + 0.10 * Math.sin(ang * 14);
+        bright = rb;
+      }
+    }
+
+    return bright;
+  }
+
+  /* ---- Планировщик кадров ---- */
+  var running   = true;
+  var visible   = true;
+  var lastTime  = 0;
+  var frameMs   = 1000 / 24;   /* 24 FPS — для декоративного виджета хватает */
+
+  function render(now) {
+    if (!running) return;
+
+    if (!visible) {
+      requestAnimationFrame(render);
+      return;
+    }
+    if (now - lastTime < frameMs) {
+      requestAnimationFrame(render);
+      return;
+    }
+    lastTime = now;
+
+    ca = Math.cos(angle);
+    sa = Math.sin(angle);
+
+    var lines = new Array(H);
+    for (var py = 0; py < H; py++) {
+      var row = '';
+      for (var px = 0; px < W; px++) {
+        var fx = px + 0.5;
+        var fy = py + 0.5;
+        var xv = (fx - W * 0.5) / scale;
+        var yv = (H * 0.5 - fy) * 2 / scale;
+        var b  = traceRay(xv, yv);
+        var idx = Math.round(b * (NSHADE - 1));
+        if (idx < 0) idx = 0;
+        else if (idx >= NSHADE) idx = NSHADE - 1;
+        row += shades.charAt(idx);
+      }
+      lines[py] = row;
+    }
+    pre.textContent = lines.join('\n');
+
+    angle += 0.04;
+    if (angle > Math.PI * 2) angle -= Math.PI * 2;
+
+    requestAnimationFrame(render);
+  }
+
+  /* Пауза, когда секция вне экрана */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible = e.isIntersecting; });
+    }, { threshold: 0 }).observe(pre);
+  }
+
+  /* Пауза, когда вкладка неактивна */
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      running = false;
+    } else if (!running) {
+      running  = true;
+      lastTime = 0;
+      requestAnimationFrame(render);
+    }
+  });
+
+  requestAnimationFrame(render);
+})();
