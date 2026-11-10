@@ -83,7 +83,6 @@
     var lastWidth = window.innerWidth;
     var lastTime = 0;
     
-    // Проверяем наличие настоящей мыши (компьютеры и ноутбуки)
     var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     function resizeCanvas() {
@@ -122,19 +121,15 @@
     function animate(currentTime) {
       requestAnimationFrame(animate);
       
-      // ДЕЛЬТА-ВРЕМЯ: делает движение плавным при любой частоте кадров
       if (!lastTime) lastTime = currentTime;
       var dt = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
       
-      // Ограничитель: если вкладка «спала» 5 секунд, не даём звездам скакнуть
       if (dt > 0.1) dt = 0.1;
-      
-      var mult = dt * 60; // Множитель скорости (1 при 60 FPS)
+      var mult = dt * 60;
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Рисуем линии между звездами
       for (var i = 0; i < stars.length; i++) {
         for (var j = i + 1; j < stars.length; j++) {
           var dx = stars[i].x - stars[j].x;
@@ -152,7 +147,6 @@
         }
       }
 
-      // Двигаем и рисуем звезды
       stars.forEach(function(star) {
         star.x += star.vx * mult;
         star.y += star.vy * mult;
@@ -160,7 +154,6 @@
         star.alpha += star.twinkleSpeed * mult;
         if (star.alpha > 1 || star.alpha < 0) star.twinkleSpeed *= -1;
 
-        // Отталкивание от мыши
         var dx = mouse.x - star.x;
         var dy = mouse.y - star.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
@@ -170,7 +163,6 @@
           star.y -= dy * force * 0.05 * mult;
         }
 
-        // Зацикливание
         if (star.x < 0) star.x = canvas.width;
         if (star.x > canvas.width) star.x = 0;
         if (star.y < 0) star.y = canvas.height;
@@ -182,7 +174,6 @@
         ctx.fill();
       });
 
-      // Падающие звезды
       if (Math.random() < 0.005 * mult && shootingStars.length < 3) { 
         createShootingStar();
       }
@@ -205,7 +196,6 @@
       });
     }
 
-    // МЫШКА: только для устройств с настоящей мышью
     if (hasMouse) {
       window.addEventListener('pointermove', function(e) {
         if (e.pointerType !== 'mouse') return;
@@ -220,7 +210,6 @@
       });
     }
 
-    // СБРОС при скролле (защита от «залипшей» мыши на мобилках)
     window.addEventListener('scroll', function() {
       if (!hasMouse) {
         mouse.x = -1000;
@@ -228,7 +217,6 @@
       }
     }, { passive: true });
 
-    // Ресайз только при смене ШИРИНЫ (игнорируем скрытие адресной строки)
     window.addEventListener('resize', function() {
       if (window.innerWidth !== lastWidth) {
         lastWidth = window.innerWidth;
@@ -242,7 +230,7 @@
 })();
 
 /* =========================================================
-   SATURN ASCII widget — декоративная анимация (слева в #contact)
+   SATURN ASCII widget — слева в #contact (без изменений)
    ========================================================= */
 (function () {
   'use strict';
@@ -250,7 +238,6 @@
   var pre = document.querySelector('.saturn-screen');
   if (!pre) return;
 
-  /* Если пользователь просит меньше анимации — рисуем один статичный кадр. */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     pre.textContent =
       "        .-\"\"\"\"\"-.        \n" +
@@ -263,7 +250,6 @@
     return;
   }
 
-  /* ---- Параметры сцены (увеличены) ---- */
   var W = 72, H = 36;
   var shades  = " .:-=+*#%@";
   var NSHADE  = shades.length;
@@ -277,8 +263,6 @@
 
   var scale = Math.min(W * 0.19, H * 0.70);
   var angle = 0;
-
-  /* ---- Ray-caster (порт из C) ---- */
   var ca = 0, sa = 0;
 
   function traceRay(xv, yv) {
@@ -292,7 +276,6 @@
     var bestZ  = -1e9;
     var bright = 0;
 
-    /* Сфера */
     var P2 = Px*Px + Py*Py + Pz*Pz;
     if (P2 < 1) {
       var zs = Math.sqrt(1 - P2);
@@ -313,7 +296,6 @@
       if (bright < 0.12) bright = 0.12;
     }
 
-    /* Кольца: плоскость y=0 */
     if (Math.abs(Dy) > 1e-6) {
       var zr = -Py / Dy;
       var rx = Px + zr * Dx;
@@ -322,7 +304,7 @@
       if (r2 >= R_IN*R_IN && r2 <= R_OUT*R_OUT && zr > bestZ) {
         var r  = Math.sqrt(r2);
         var rb = 0.70;
-        if (r > 1.85 && r < 1.95) rb = 0.10;   /* деление Кассини */
+        if (r > 1.85 && r < 1.95) rb = 0.10;
         if (r < 1.38) rb = 0.30;
         if (r > 2.25) rb = 0.40;
         var ang = Math.atan2(rz, rx);
@@ -334,7 +316,6 @@
     return bright;
   }
 
-  /* ---- Планировщик кадров ---- */
   var running   = true;
   var visible   = true;
   var lastTime  = 0;
@@ -342,15 +323,8 @@
 
   function render(now) {
     if (!running) return;
-
-    if (!visible) {
-      requestAnimationFrame(render);
-      return;
-    }
-    if (now - lastTime < frameMs) {
-      requestAnimationFrame(render);
-      return;
-    }
+    if (!visible) { requestAnimationFrame(render); return; }
+    if (now - lastTime < frameMs) { requestAnimationFrame(render); return; }
     lastTime = now;
 
     ca = Math.cos(angle);
@@ -380,29 +354,23 @@
     requestAnimationFrame(render);
   }
 
-  /* Пауза, когда секция вне экрана */
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { visible = e.isIntersecting; });
     }, { threshold: 0 }).observe(pre);
   }
 
-  /* Пауза, когда вкладка неактивна */
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-      running = false;
-    } else if (!running) {
-      running  = true;
-      lastTime = 0;
-      requestAnimationFrame(render);
-    }
+    if (document.hidden) { running = false; }
+    else if (!running) { running = true; lastTime = 0; requestAnimationFrame(render); }
   });
 
   requestAnimationFrame(render);
 })();
 
 /* =========================================================
-   JUPITER ASCII widget — декоративная анимация (справа в #contact)
+   JUPITER ASCII widget — справа в #contact
+   ИСПРАВЛЕНО: 4 пятна на 4 долготах + продольная текстура
    ========================================================= */
 (function () {
   'use strict';
@@ -423,10 +391,10 @@
   }
 
   var W = 72, H = 36;
-  var shades  = " .:-=+*#%@";
-  var NSHADE  = shades.length;
+  var shades = " .:-=+*#%@";
+  var NSHADE = shades.length;
 
-  var tilt = 0.25; /* наклон оси Юпитера меньше */
+  var tilt = 0.25;
   var ct = Math.cos(tilt), st = Math.sin(tilt);
   var lx = -0.4, ly = 0.6, lz = 0.7;
   var ll = Math.sqrt(lx*lx + ly*ly + lz*lz);
@@ -434,13 +402,26 @@
 
   var scale = Math.min(W * 0.19, H * 0.70);
   var angle = 0;
-
   var ca = 0, sa = 0;
 
-  /* Параметры Большого Красного Пятна (фиксированы в пространстве объекта) */
-  var SPOT_LON = 1.5;  /* Начальная долгота */
-  var SPOT_LAT = -0.35; /* Широта (южное полушарие) */
-  var SPOT_RAD = 0.28; /* Угловой радиус пятна */
+  /* Хелпер: считает 3D-координаты пятна по широте/долготе */
+  function makeSpot(lat, lon, rad, factor) {
+    return {
+      x: Math.cos(lat) * Math.cos(lon),
+      y: Math.sin(lat),
+      z: Math.cos(lat) * Math.sin(lon),
+      rad: rad,
+      factor: factor
+    };
+  }
+
+  /* 4 пятна через 90° по долготе — на любом угле хотя бы одно видно */
+  var SPOTS = [
+    makeSpot(-0.20, 0,                  0.42, 0.05),  // Большое Красное Пятно
+    makeSpot( 0.18, Math.PI / 2,        0.30, 1.6),   // Белый овал 1
+    makeSpot(-0.15, Math.PI,            0.28, 0.10),  // Тёмное пятно
+    makeSpot( 0.20, 3 * Math.PI / 2,    0.30, 1.5)    // Белый овал 2
+  ];
 
   function traceRay(xv, yv) {
     var Px = xv * ca + yv * st * sa;
@@ -450,13 +431,10 @@
     var Dy =  st;
     var Dz =  ct * ca;
 
-    var bestZ = -1e9;
     var bright = 0;
-
     var P2 = Px*Px + Py*Py + Pz*Pz;
     if (P2 < 1) {
       var zs = Math.sqrt(1 - P2);
-      bestZ = zs;
       var ox = Px + zs * Dx;
       var oy = Py + zs * Dy;
       var oz = Pz + zs * Dz;
@@ -469,28 +447,34 @@
       if (diff < 0) diff = 0;
       var base = 0.15 + 0.85 * diff;
 
-      /* Полосы по широте */
-      var band = 0.5 + 0.5 * Math.sin(oy * 18 + 0.5 * Math.sin(oy * 7));
+      /* Широтные полосы */
+      var band = 0.5 + 0.5 * Math.sin(oy * 16 + 0.4 * Math.sin(oy * 6));
 
-      /* Большое Красное Пятно — фиксировано на сфере */
-      var lon_spot = SPOT_LON;
-      var x_spot = Math.cos(SPOT_LAT) * Math.cos(lon_spot);
-      var y_spot = Math.sin(SPOT_LAT);
-      var z_spot = Math.cos(SPOT_LAT) * Math.sin(lon_spot);
+      /* Продольная текстура — «дышит» при вращении */
+      var lon = Math.atan2(oz, ox);
+      var tex = 0.85
+              + 0.10 * Math.sin(lon * 2.5 + oy * 1.5)
+              + 0.05 * Math.sin(lon * 6.0 - oy * 2.0);
 
-      var dot = ox * x_spot + oy * y_spot + oz * z_spot;
-      var dist = Math.acos(Math.max(-1, Math.min(1, dot)));
-
+      /* Накладываем все пятна */
       var spot_factor = 1.0;
-      if (dist < SPOT_RAD) {
-        spot_factor = 0.2; /* пятно тёмное */
-      } else if (dist < SPOT_RAD * 1.5) {
-        spot_factor = 0.2 + 0.8 * ((dist - SPOT_RAD) / (SPOT_RAD * 0.5));
+      for (var i = 0; i < SPOTS.length; i++) {
+        var s = SPOTS[i];
+        var dot = ox * s.x + oy * s.y + oz * s.z;
+        if (dot < -1) dot = -1;
+        else if (dot > 1) dot = 1;
+        var dist = Math.acos(dot);
+        if (dist < s.rad) {
+          spot_factor *= s.factor;
+        } else if (dist < s.rad * 1.4) {
+          var t = (dist - s.rad) / (s.rad * 0.4);
+          spot_factor *= 1.0 + (s.factor - 1.0) * (1 - t);
+        }
       }
 
-      bright = base * (0.5 + 0.5 * band) * spot_factor;
+      bright = base * (0.35 + 0.65 * band) * tex * spot_factor;
       if (bright > 1) bright = 1;
-      if (bright < 0.1) bright = 0.1;
+      if (bright < 0.02) bright = 0.02;   /* позволяет пятнам быть «пробелом» */
     }
 
     return bright;
@@ -499,7 +483,7 @@
   var running = true;
   var visible = true;
   var lastTime = 0;
-  var frameMs = 1000 / 24;
+  var frameMs = 1000 / 30;
 
   function render(now) {
     if (!running) return;
@@ -528,7 +512,7 @@
     }
     pre.textContent = lines.join('\n');
 
-    angle += 0.03; /* Скорость вращения */
+    angle += 0.05;   /* было 0.03 — быстрее */
     if (angle > Math.PI * 2) angle -= Math.PI * 2;
 
     requestAnimationFrame(render);
