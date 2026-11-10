@@ -77,9 +77,9 @@
     var mouse = { x: -1000, y: -1000 };
     
     // Настройки (можно менять)
-    var STAR_DENSITY = 6000; // Меньше число = больше звезд (было 4000)
-    var CONNECTION_DIST = 100; // Дистанция соединения линиями
-    var MOUSE_RADIUS = 150; // Радиус влияния мыши
+    var STAR_DENSITY = 6000; 
+    var CONNECTION_DIST = 100; 
+    var MOUSE_RADIUS = 150; 
     
     function resizeCanvas() {
       canvas.width = canvas.offsetWidth;
@@ -95,8 +95,8 @@
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           size: Math.random() * 1.5 + 0.5,
-          vx: (Math.random() - 0.5) * 0.4, // Скорость движения по X (увеличена)
-          vy: (Math.random() - 0.5) * 0.4, // Скорость движения по Y (увеличена)
+          vx: (Math.random() - 0.5) * 0.4, 
+          vy: (Math.random() - 0.5) * 0.4, 
           alpha: Math.random(),
           twinkleSpeed: Math.random() * 0.03 + 0.01
         });
@@ -111,7 +111,7 @@
         len: Math.random() * 80 + 50,
         speed: Math.random() * 8 + 6,
         alpha: 1,
-        angle: Math.PI / 4 // Летят по диагонали
+        angle: Math.PI / 4 
       });
     }
 
@@ -129,7 +129,6 @@
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
             ctx.lineTo(stars[j].x, stars[j].y);
-            // Линии зеленоватые в тон вашего дизайна
             ctx.strokeStyle = 'rgba(34, 197, 94, ' + (1 - dist / CONNECTION_DIST) * 0.3 + ')';
             ctx.lineWidth = 0.5;
             ctx.stroke();
@@ -150,7 +149,6 @@
         var dy = mouse.y - star.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < MOUSE_RADIUS) {
-          // Чем ближе мышка, тем сильнее отталкивает
           var force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
           star.x -= dx * force * 0.05;
           star.y -= dy * force * 0.05;
@@ -169,17 +167,17 @@
       });
 
       // Рисуем падающие звезды
-      if (Math.random() < 0.005 && shootingStars.length < 3) { // Шанс появления
+      if (Math.random() < 0.005 && shootingStars.length < 3) { 
         createShootingStar();
       }
       
       shootingStars.forEach(function(sStar, index) {
         sStar.x += Math.cos(sStar.angle) * sStar.speed;
         sStar.y += Math.sin(sStar.angle) * sStar.speed;
-        sStar.alpha -= 0.01; // Затухание
+        sStar.alpha -= 0.01; 
 
         if (sStar.alpha <= 0 || sStar.x > canvas.width || sStar.y > canvas.height) {
-          shootingStars.splice(index, 1); // Удаляем улетевшую звезду
+          shootingStars.splice(index, 1); 
         } else {
           ctx.beginPath();
           ctx.moveTo(sStar.x, sStar.y);
@@ -193,17 +191,12 @@
       requestAnimationFrame(animate);
     }
 
+    // ТОЛЬКО МЫШКА (без touchmove, чтобы не ломать скролл на телефоне)
     window.addEventListener('mousemove', function(e) {
       var rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     });
-    
-    window.addEventListener('touchmove', function(e) {
-      var rect = canvas.getBoundingClientRect();
-      mouse.x = e.touches[0].clientX - rect.left;
-      mouse.y = e.touches[0].clientY - rect.top;
-    }, { passive: true });
     
     window.addEventListener('mouseout', function() {
       mouse.x = -1000;
